@@ -1,17 +1,705 @@
 [
   {
-    "question": "Học phí hàng năm của chương trình Business tại RMIT Vietnam là bao nhiêu?",
-    "expected_answer": "Khoảng 375.840.000 VND mỗi năm (tùy chương trình cụ thể).",
-    "expected_context": "Trang Tuition Fees, mục Undergraduate Programs"
+    "id": "Q01",
+    "question": "Thời gian thử việc tối đa đối với công việc có chức danh nghề nghiệp cần trình độ chuyên môn, kỹ thuật từ cao đẳng trở lên là bao lâu?",
+    "expected_answer": "Không quá 60 ngày. Ngoài ra thử việc chỉ được áp dụng một lần đối với một công việc.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.25 (Điều 25 Bộ luật Lao động 45/2019/QH14)",
+    "reference_contexts": [
+      "Điều 20.2.LQ.25. Thời gian thử việc\n(Điều 25 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\nThời gian thử việc do hai bên thỏa thuận căn cứ vào tính chất và mức độ phức tạp của công việc nhưng chỉ được thử việc một lần đối với một công việc và bảo đảm điều kiện sau đây: \n 1. Không quá 180 ngày đối với công việc của người quản lý doanh nghiệp theo quy định của Luật Doanh nghiệp, Luật Quản lý, sử dụng vốn nhà nước đầu tư vào sản xuất, kinh doanh tại doanh nghiệp; \n 2. Không quá 60 ngày đối với công việc có chức danh nghề nghiệp cần trình độ chuyên môn, kỹ thuật từ cao đẳng trở lên; \n 3. Không quá 30 ngày đối với công việc có chức danh nghề nghiệp cần trình độ chuyên môn, kỹ thuật trung cấp, công nhân kỹ thuật, nhân viên nghiệp vụ; \n 4. Không quá 06 ngày làm việc đối với công việc khác."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.25"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Baseline single-hop lookup. Nếu câu này fail thì lỗi nằm ở indexing/embedding, không phải ở retrieval strategy."
   },
   {
-    "question": "Học phí được thanh toán theo hình thức nào?",
-    "expected_answer": "Thanh toán theo từng học kỳ, tính theo từng môn học đã đăng ký.",
-    "expected_context": "Trang Tuition Fees, mục Payment Structure"
+    "id": "Q02",
+    "question": "Tiền lương trong thời gian thử việc tối thiểu phải bằng bao nhiêu phần trăm mức lương của công việc đó?",
+    "expected_answer": "Ít nhất bằng 85% mức lương của công việc đó, do hai bên thỏa thuận.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.26",
+    "reference_contexts": [
+      "Điều 20.2.LQ.26. Tiền lương thử việc\n(Điều 26 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\nTiền lương của người lao động trong thời gian thử việc do hai bên thỏa thuận nhưng ít nhất phải bằng 85% mức lương của công việc đó."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.26"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "numeric_precision",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Điều rất ngắn (1 câu). Test xem chunking có nuốt mất điều ngắn khi gộp vào chunk lớn không."
   },
   {
-    "question": "Trường có cung cấp ký túc xá trong khuôn viên không?",
-    "expected_answer": "Không — trường không cung cấp chỗ ở trong khuôn viên, nhưng có đội ngũ hỗ trợ sinh viên tìm chỗ ở gần trường.",
-    "expected_context": "Trang Accommodation Services"
+    "id": "Q03",
+    "question": "Liệt kê đầy đủ các mức thời gian thử việc tối đa theo Bộ luật Lao động.",
+    "expected_answer": "Có 4 mức: (1) không quá 180 ngày với công việc của người quản lý doanh nghiệp; (2) không quá 60 ngày với công việc cần trình độ chuyên môn kỹ thuật từ cao đẳng trở lên; (3) không quá 30 ngày với công việc cần trình độ trung cấp, công nhân kỹ thuật, nhân viên nghiệp vụ; (4) không quá 06 ngày làm việc với công việc khác.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.25, đủ cả 4 khoản",
+    "reference_contexts": [
+      "Điều 20.2.LQ.25. Thời gian thử việc\n(Điều 25 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\nThời gian thử việc do hai bên thỏa thuận căn cứ vào tính chất và mức độ phức tạp của công việc nhưng chỉ được thử việc một lần đối với một công việc và bảo đảm điều kiện sau đây: \n 1. Không quá 180 ngày đối với công việc của người quản lý doanh nghiệp theo quy định của Luật Doanh nghiệp, Luật Quản lý, sử dụng vốn nhà nước đầu tư vào sản xuất, kinh doanh tại doanh nghiệp; \n 2. Không quá 60 ngày đối với công việc có chức danh nghề nghiệp cần trình độ chuyên môn, kỹ thuật từ cao đẳng trở lên; \n 3. Không quá 30 ngày đối với công việc có chức danh nghề nghiệp cần trình độ chuyên môn, kỹ thuật trung cấp, công nhân kỹ thuật, nhân viên nghiệp vụ; \n 4. Không quá 06 ngày làm việc đối với công việc khác."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.25"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "enumeration",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Test recall TRỌN VẸN một danh sách. Chunk cắt giữa điều sẽ mất khoản 3-4 → context_recall tụt."
+  },
+  {
+    "id": "Q04",
+    "question": "Người lao động làm thêm giờ vào ngày nghỉ lễ, tết được trả lương ít nhất bằng bao nhiêu phần trăm?",
+    "expected_answer": "Ít nhất bằng 300% đơn giá tiền lương hoặc tiền lương thực trả, chưa kể tiền lương ngày lễ, tết, ngày nghỉ có hưởng lương đối với người lao động hưởng lương ngày.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.98 khoản 1 điểm c",
+    "reference_contexts": [
+      "Điều 20.2.LQ.98. Tiền lương làm thêm giờ, làm việc vào ban đêm\n(Điều 98 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động làm thêm giờ được trả lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc đang làm như sau: \n a) Vào ngày thường, ít nhất bằng 150%; \n b) Vào ngày nghỉ hằng tuần, ít nhất bằng 200%; \n c) Vào ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương, ít nhất bằng 300% chưa kể tiền lương ngày lễ, tết, ngày nghỉ có hưởng lương đối với người lao động hưởng lương ngày. \n 2. Người lao động làm việc vào ban đêm thì được trả thêm ít nhất bằng 30% tiền lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc của ngày làm việc bình thường. \n 3. Người lao động làm thêm giờ vào ban đêm thì ngoài việc trả lương theo quy định tại khoản 1 và khoản 2 Điều này, người lao động còn được trả thêm 20% tiền lương tính theo đơn giá tiền lương hoặc tiền lương theo công việc làm vào ban ngày của ngày làm việc bình thường hoặc của ngày nghỉ hằng tuần hoặc của ngày nghỉ lễ, tết. \n 4. Chính phủ quy định chi tiết Điều này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.98"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "numeric_precision",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Bẫy: mệnh đề 'chưa kể tiền lương ngày lễ' hay bị LLM bỏ qua → faithfulness cao nhưng thiếu."
+  },
+  {
+    "id": "Q05",
+    "question": "So sánh mức lương làm thêm giờ vào ngày thường, ngày nghỉ hằng tuần và ngày nghỉ lễ, tết.",
+    "expected_answer": "Ngày thường ít nhất 150%; ngày nghỉ hằng tuần ít nhất 200%; ngày nghỉ lễ, tết và ngày nghỉ có hưởng lương ít nhất 300% (chưa kể tiền lương ngày lễ, tết đối với người hưởng lương ngày).",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.98 khoản 1 điểm a, b, c",
+    "reference_contexts": [
+      "Điều 20.2.LQ.98. Tiền lương làm thêm giờ, làm việc vào ban đêm\n(Điều 98 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động làm thêm giờ được trả lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc đang làm như sau: \n a) Vào ngày thường, ít nhất bằng 150%; \n b) Vào ngày nghỉ hằng tuần, ít nhất bằng 200%; \n c) Vào ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương, ít nhất bằng 300% chưa kể tiền lương ngày lễ, tết, ngày nghỉ có hưởng lương đối với người lao động hưởng lương ngày. \n 2. Người lao động làm việc vào ban đêm thì được trả thêm ít nhất bằng 30% tiền lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc của ngày làm việc bình thường. \n 3. Người lao động làm thêm giờ vào ban đêm thì ngoài việc trả lương theo quy định tại khoản 1 và khoản 2 Điều này, người lao động còn được trả thêm 20% tiền lương tính theo đơn giá tiền lương hoặc tiền lương theo công việc làm vào ban ngày của ngày làm việc bình thường hoặc của ngày nghỉ hằng tuần hoặc của ngày nghỉ lễ, tết. \n 4. Chính phủ quy định chi tiết Điều này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.98"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "comparative",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Test khả năng trích xuất và đối chiếu nhiều giá trị trong cùng một điều."
+  },
+  {
+    "id": "Q06",
+    "question": "Người lao động làm thêm giờ vào ban đêm của ngày nghỉ lễ thì được trả những khoản nào?",
+    "expected_answer": "Cộng dồn ba khoản theo Điều 98: (1) lương làm thêm ngày lễ ít nhất 300%; (2) phụ cấp làm việc ban đêm ít nhất 30%; (3) thêm 20% tiền lương tính theo đơn giá tiền lương của công việc làm vào ban ngày của ngày nghỉ lễ, tết. Nghị định 145/2020/NĐ-CP quy định chi tiết cách tính.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.98 (khoản 1, 2, 3) + Điều 20.2.NĐ.3.57 (Nghị định 145/2020/NĐ-CP)",
+    "reference_contexts": [
+      "Điều 20.2.LQ.98. Tiền lương làm thêm giờ, làm việc vào ban đêm\n(Điều 98 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động làm thêm giờ được trả lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc đang làm như sau: \n a) Vào ngày thường, ít nhất bằng 150%; \n b) Vào ngày nghỉ hằng tuần, ít nhất bằng 200%; \n c) Vào ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương, ít nhất bằng 300% chưa kể tiền lương ngày lễ, tết, ngày nghỉ có hưởng lương đối với người lao động hưởng lương ngày. \n 2. Người lao động làm việc vào ban đêm thì được trả thêm ít nhất bằng 30% tiền lương tính theo đơn giá tiền lương hoặc tiền lương thực trả theo công việc của ngày làm việc bình thường. \n 3. Người lao động làm thêm giờ vào ban đêm thì ngoài việc trả lương theo quy định tại khoản 1 và khoản 2 Điều này, người lao động còn được trả thêm 20% tiền lương tính theo đơn giá tiền lương hoặc tiền lương theo công việc làm vào ban ngày của ngày làm việc bình thường hoặc của ngày nghỉ hằng tuần hoặc của ngày nghỉ lễ, tết. \n 4. Chính phủ quy định chi tiết Điều này.",
+      "Điều 20.2.NĐ.3.57. Tiền lương làm thêm giờ vào ban đêm\n(Điều 57 Nghị định số 145/2020/NĐ-CP, có hiệu lực thi hành kể từ ngày 01/02/2021)\nNgười lao động làm thêm giờ vào ban đêm theo khoản 3 Điều 98 của Bộ luật Lao động, được hưởng tiền lương tính theo công thức sau: \n 1. Đối với người lao động hưởng lương theo thời gian, tiền lương làm thêm giờ vào ban đêm được tính như sau: \n Trong đó: \n a) Tiền lương giờ thực trả của công việc đang làm vào ngày làm việc bình thường được xác định theo điểm a khoản 1 Điều 55 Nghị định này; \n b) Tiền lương giờ vào ban ngày của ngày làm việc bình thường hoặc của ngày nghỉ hằng tuần hoặc của ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương được xác định như sau: \n b1) Tiền lương giờ vào ban ngày của ngày làm việc bình thường, được tính ít nhất bằng 100% so với tiền lương giờ thực trả của công việc đang làm vào ngày làm việc bình thường đối với trường hợp người lao động không làm thêm giờ vào ban ngày của ngày đó (trước khi làm thêm giờ vào ban đêm); ít nhất bằng 150% so với tiền lương giờ thực trả của công việc đang làm vào ngày làm việc bình thường đối với trường hợp người lao động có làm thêm giờ vào ban ngày của ngày đó (trước khi làm thêm giờ vào ban đêm); \n b2) Tiền lương giờ vào ban ngày của ngày nghỉ hằng tuần, được tính ít nhất bằng 200% so với tiền lương giờ thực trả của công việc đang làm vào ngày làm việc bình thường; \n b3) Tiền lương giờ vào ban ngày của ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương, được tính ít nhất bằng 300% so với tiền lương giờ thực trả của công việc đang làm vào ngày làm việc bình thường. \n 2. Đối với người lao động hưởng lương theo sản phẩm, tiền lương làm thêm giờ vào ban đêm được tính như sau: \n Trong đó, đơn giá tiền lương sản phẩm vào ban ngày của ngày làm việc bình thường hoặc của ngày nghỉ hằng tuần hoặc của ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương được xác định như sau: \n a) Đơn giá tiền lương sản phẩm vào ban ngày của ngày làm việc bình thường, được tính ít nhất bằng 100% so với đơn giá tiền lương sản phẩm của ngày làm việc bình thường đối với trường hợp người lao động không làm thêm giờ vào ban ngày của ngày đó (trước khi làm thêm giờ vào ban đêm); ít nhất bằng 150% so với đơn giá tiền lương sản phẩm của ngày làm việc bình thường đối với trường hợp người lao động có làm thêm giờ vào ban ngày của ngày đó (trước khi làm thêm giờ vào ban đêm); \n b) Đơn giá tiền lương sản phẩm vào ban ngày của ngày nghỉ hằng tuần, được tính ít nhất bằng 200% so với đơn giá tiền lương sản phẩm của ngày làm việc bình thường; \n c) Đơn giá tiền lương sản phẩm vào ban ngày của ngày nghỉ lễ, tết, ngày nghỉ có hưởng lương, được tính ít nhất 300% so với đơn giá tiền lương sản phẩm của ngày làm việc bình thường."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.98",
+      "Điều 20.2.NĐ.3.57"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14",
+      "Nghị định số 145/2020/NĐ-CP"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "multi_hop",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Multi-hop Luật → Nghị định hướng dẫn. Retriever chỉ lấy điều Luật sẽ thiếu công thức chi tiết."
+  },
+  {
+    "id": "Q07",
+    "question": "Người lao động làm việc đủ 12 tháng trong điều kiện bình thường được nghỉ hằng năm bao nhiêu ngày?",
+    "expected_answer": "12 ngày làm việc, hưởng nguyên lương theo hợp đồng lao động.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.113 khoản 1 điểm a",
+    "reference_contexts": [
+      "Điều 20.2.LQ.113. Nghỉ hằng năm\n(Điều 113 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động làm việc đủ 12 tháng cho một người sử dụng lao động thì được nghỉ hằng năm, hưởng nguyên lương theo hợp đồng lao động như sau: \n a) 12 ngày làm việc đối với người làm công việc trong điều kiện bình thường; \n b) 14 ngày làm việc đối với người lao động chưa thành niên, lao động là người khuyết tật, người làm nghề, công việc nặng nhọc, độc hại, nguy hiểm; \n c) 16 ngày làm việc đối với người làm nghề, công việc đặc biệt nặng nhọc, độc hại, nguy hiểm. \n 2. Người lao động làm việc chưa đủ 12 tháng cho một người sử dụng lao động thì số ngày nghỉ hằng năm theo tỷ lệ tương ứng với số tháng làm việc. \n 3. Trường hợp do thôi việc, bị mất việc làm mà chưa nghỉ hằng năm hoặc chưa nghỉ hết số ngày nghỉ hằng năm thì được người sử dụng lao động thanh toán tiền lương cho những ngày chưa nghỉ. \n 4. Người sử dụng lao động có trách nhiệm quy định lịch nghỉ hằng năm sau khi tham khảo ý kiến của người lao động và phải thông báo trước cho người lao động biết. Người lao động có thể thỏa thuận với người sử dụng lao động để nghỉ hằng năm thành nhiều lần hoặc nghỉ gộp tối đa 03 năm một lần. \n 5. Khi nghỉ hằng năm mà chưa đến kỳ trả lương, người lao động được tạm ứng tiền lương theo quy định tại khoản 3 Điều 101 của Bộ luật này. \n 6. Khi nghỉ hằng năm, nếu người lao động đi bằng các phương tiện đường bộ, đường sắt, đường thủy mà số ngày đi đường cả đi và về trên 02 ngày thì từ ngày thứ 03 trở đi được tính thêm thời gian đi đường ngoài ngày nghỉ hằng năm và chỉ được tính cho 01 lần nghỉ trong năm. \n 7. Chính phủ quy định chi tiết điều này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.113"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Baseline. Cặp với Q08 để đo mất mát khi hỏi dạng liệt kê."
+  },
+  {
+    "id": "Q08",
+    "question": "Những đối tượng nào được nghỉ hằng năm 14 ngày và 16 ngày làm việc?",
+    "expected_answer": "14 ngày làm việc: người lao động chưa thành niên, lao động là người khuyết tật, người làm nghề/công việc nặng nhọc, độc hại, nguy hiểm. 16 ngày làm việc: người làm nghề/công việc đặc biệt nặng nhọc, độc hại, nguy hiểm.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.113 khoản 1 điểm b, c",
+    "reference_contexts": [
+      "Điều 20.2.LQ.113. Nghỉ hằng năm\n(Điều 113 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động làm việc đủ 12 tháng cho một người sử dụng lao động thì được nghỉ hằng năm, hưởng nguyên lương theo hợp đồng lao động như sau: \n a) 12 ngày làm việc đối với người làm công việc trong điều kiện bình thường; \n b) 14 ngày làm việc đối với người lao động chưa thành niên, lao động là người khuyết tật, người làm nghề, công việc nặng nhọc, độc hại, nguy hiểm; \n c) 16 ngày làm việc đối với người làm nghề, công việc đặc biệt nặng nhọc, độc hại, nguy hiểm. \n 2. Người lao động làm việc chưa đủ 12 tháng cho một người sử dụng lao động thì số ngày nghỉ hằng năm theo tỷ lệ tương ứng với số tháng làm việc. \n 3. Trường hợp do thôi việc, bị mất việc làm mà chưa nghỉ hằng năm hoặc chưa nghỉ hết số ngày nghỉ hằng năm thì được người sử dụng lao động thanh toán tiền lương cho những ngày chưa nghỉ. \n 4. Người sử dụng lao động có trách nhiệm quy định lịch nghỉ hằng năm sau khi tham khảo ý kiến của người lao động và phải thông báo trước cho người lao động biết. Người lao động có thể thỏa thuận với người sử dụng lao động để nghỉ hằng năm thành nhiều lần hoặc nghỉ gộp tối đa 03 năm một lần. \n 5. Khi nghỉ hằng năm mà chưa đến kỳ trả lương, người lao động được tạm ứng tiền lương theo quy định tại khoản 3 Điều 101 của Bộ luật này. \n 6. Khi nghỉ hằng năm, nếu người lao động đi bằng các phương tiện đường bộ, đường sắt, đường thủy mà số ngày đi đường cả đi và về trên 02 ngày thì từ ngày thứ 03 trở đi được tính thêm thời gian đi đường ngoài ngày nghỉ hằng năm và chỉ được tính cho 01 lần nghỉ trong năm. \n 7. Chính phủ quy định chi tiết điều này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.113"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "enumeration",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Phân biệt 'nặng nhọc' vs 'đặc biệt nặng nhọc' — test độ chính xác ngữ nghĩa gần nhau."
+  },
+  {
+    "id": "Q09",
+    "question": "Em đang đi làm công ty, giờ muốn nghỉ ngang thì phải báo trước cho sếp bao lâu ạ?",
+    "expected_answer": "Tùy loại hợp đồng: ít nhất 45 ngày với hợp đồng không xác định thời hạn; ít nhất 30 ngày với hợp đồng xác định thời hạn từ 12 đến 36 tháng; ít nhất 03 ngày làm việc với hợp đồng dưới 12 tháng. Một số trường hợp (không được trả đủ lương, bị ngược đãi, bị quấy rối tình dục, lao động nữ mang thai phải nghỉ việc theo chỉ định...) được đơn phương chấm dứt mà không cần báo trước.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.35",
+    "reference_contexts": [
+      "Điều 20.2.LQ.35. Quyền đơn phương chấm dứt hợp đồng lao động của người lao động\n(Điều 35 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Người lao động có quyền đơn phương chấm dứt hợp đồng lao động nhưng phải báo trước cho người sử dụng lao động như sau: \n a) Ít nhất 45 ngày nếu làm việc theo hợp đồng lao động không xác định thời hạn; \n b) Ít nhất 30 ngày nếu làm việc theo hợp đồng lao động xác định thời hạn có thời hạn từ 12 tháng đến 36 tháng; \n c) Ít nhất 03 ngày làm việc nếu làm việc theo hợp đồng lao động xác định thời hạn có thời hạn dưới 12 tháng; \n d) Đối với một số ngành, nghề, công việc đặc thù thì thời hạn báo trước được thực hiện theo quy định của Chính phủ. \n 2. Người lao động có quyền đơn phương chấm dứt hợp đồng lao động không cần báo trước trong trường hợp sau đây: \n a) Không được bố trí theo đúng công việc, địa điểm làm việc hoặc không được bảo đảm điều kiện làm việc theo thỏa thuận, trừ trường hợp quy định tại Điều 29 của Bộ luật này; \n b) Không được trả đủ lương hoặc trả lương không đúng thời hạn, trừ trường hợp quy định tại khoản 4 Điều 97 của Bộ luật này; \n c) Bị người sử dụng lao động ngược đãi, đánh đập hoặc có lời nói, hành vi nhục mạ, hành vi làm ảnh hưởng đến sức khỏe, nhân phẩm, danh dự; bị cưỡng bức lao động; \n d) Bị quấy rối tình dục tại nơi làm việc; \n đ) Lao động nữ mang thai phải nghỉ việc theo quy định tại khoản 1 Điều 138 của Bộ luật này; \n e) Đủ tuổi nghỉ hưu theo quy định tại Điều 169 của Bộ luật này, trừ trường hợp các bên có thỏa thuận khác; \n g) Người sử dụng lao động cung cấp thông tin không trung thực theo quy định tại khoản 1 Điều 16 của Bộ luật này làm ảnh hưởng đến việc thực hiện hợp đồng lao động."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.35"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "paraphrase_colloquial",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Ngôn ngữ đời thường ('nghỉ ngang', 'sếp') không trùng từ khóa luật ('đơn phương chấm dứt hợp đồng lao động'). BM25 thuần sẽ trượt; đây là câu để chứng minh dense/hybrid ăn điểm."
+  },
+  {
+    "id": "Q10",
+    "question": "Vợ em sắp sinh, cho hỏi nghỉ thai sản được mấy tháng, sinh đôi thì có được nghỉ thêm không?",
+    "expected_answer": "Lao động nữ được nghỉ thai sản trước và sau khi sinh 06 tháng, thời gian nghỉ trước khi sinh không quá 02 tháng. Sinh đôi trở lên thì từ con thứ 02 trở đi, mỗi con mẹ được nghỉ thêm 01 tháng. Lao động nam khi vợ sinh con được nghỉ hưởng chế độ thai sản theo pháp luật về bảo hiểm xã hội.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.139 khoản 1 và khoản 5",
+    "reference_contexts": [
+      "Điều 20.2.LQ.139. Nghỉ thai sản\n(Điều 139 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Lao động nữ được nghỉ thai sản trước và sau khi sinh con là 06 tháng; thời gian nghỉ trước khi sinh không quá 02 tháng. \n Trường hợp lao động nữ sinh đôi trở lên thì tính từ con thứ 02 trở đi, cứ mỗi con, người mẹ được nghỉ thêm 01 tháng. \n 2. Trong thời gian nghỉ thai sản, lao động nữ được hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội. \n 3. Hết thời gian nghỉ thai sản theo quy định tại khoản 1 Điều này, nếu có nhu cầu, lao động nữ có thể nghỉ thêm một thời gian không hưởng lương sau khi thỏa thuận với người sử dụng lao động. \n 4. Trước khi hết thời gian nghỉ thai sản theo quy định tại khoản 1 Điều này, lao động nữ có thể trở lại làm việc khi đã nghỉ ít nhất được 04 tháng nhưng người lao động phải báo trước, được người sử dụng lao động đồng ý và có xác nhận của cơ sở khám bệnh, chữa bệnh có thẩm quyền về việc đi làm sớm không có hại cho sức khỏe của người lao động. Trong trường hợp này, ngoài tiền lương của những ngày làm việc do người sử dụng lao động trả, lao động nữ vẫn tiếp tục được hưởng trợ cấp thai sản theo quy định của pháp luật về bảo hiểm xã hội. \n 5. Lao động nam khi vợ sinh con, người lao động nhận nuôi con nuôi dưới 06 tháng tuổi, lao động nữ mang thai hộ và người lao động là người mẹ nhờ mang thai hộ được nghỉ việc hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.139"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "paraphrase_colloquial",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Câu hỏi 2 vế (thời gian + sinh đôi) diễn đạt đời thường. Test khả năng trả lời đủ ý."
+  },
+  {
+    "id": "Q11",
+    "question": "Trong thời gian nghỉ thai sản, người lao động có phải đóng bảo hiểm y tế không và ai đóng?",
+    "expected_answer": "Người lao động không phải tự đóng. Trong thời gian nghỉ việc hưởng chế độ thai sản, mức đóng bảo hiểm y tế hằng tháng tối đa bằng 6% tiền lương tháng của người lao động trước khi nghỉ thai sản và do tổ chức bảo hiểm xã hội đóng. Chế độ thai sản thực hiện theo pháp luật về bảo hiểm xã hội.",
+    "expected_context": "Đề mục Bảo hiểm y tế — Điều 2.2.LQ.13 khoản 1 điểm a; Đề mục Lao động — Điều 20.2.LQ.139 khoản 2",
+    "reference_contexts": [
+      "Điều 2.2.LQ.13. Mức đóng và trách nhiệm đóng bảo hiểm y tế\n(Điều 13 Luật số 25/2008/QH12, có hiệu lực thi hành kể từ ngày 01/07/2009)\n1. Mức đóng và trách nhiệm đóng bảo hiểm y tế được quy định như sau: \n a) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 1 Điều 12 của Luật này tối đa bằng 6% tiền lương tháng, trong đó người sử dụng lao động đóng 2/3 và người lao động đóng 1/3. Trong thời gian người lao động nghỉ việc hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội thì mức đóng hằng tháng tối đa bằng 6% tiền lương tháng của người lao động trước khi nghỉ thai sản và do tổ chức bảo hiểm xã hội đóng; \n b) Mức đóng hàng tháng của đối tượng quy định tại điểm b khoản 1 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở, trong đó người sử dụng lao động đóng 2/3 và người lao động đóng 1/3; \n c) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 2 Điều 12 của Luật này tối đa bằng 6% tiền lương hưu, trợ cấp mất sức lao động và do tổ chức bảo hiểm xã hội đóng; \n d) Mức đóng hàng tháng của đối tượng quy định tại điểm b và điểm c khoản 2 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do tổ chức bảo hiểm xã hội đóng; \n đ) Mức đóng hàng tháng của đối tượng quy định tại điểm d khoản 2 Điều 12 của Luật này tối đa bằng 6% tiền trợ cấp thất nghiệp và do tổ chức bảo hiểm xã hội đóng; \n e) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 3 Điều 12 của Luật này tối đa bằng 6% tiền lương tháng đối với người hưởng lương, tối đa bằng 6% mức lương cơ sở đối với người hưởng sinh hoạt phí và do ngân sách nhà nước đóng; \n g) Mức đóng hàng tháng của đối tượng quy định tại các điểm b, c, d, đ, e, g, h, i, k, l và m khoản 3 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do ngân sách nhà nước đóng; \n h) Mức đóng hàng tháng của đối tượng quy định tại điểm n khoản 3 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do cơ quan, tổ chức, đơn vị cấp học bổng đóng; \n i) Mức đóng hàng tháng của đối tượng quy định tại khoản 4 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở do đối tượng tự đóng và được ngân sách nhà nước hỗ trợ một phần mức đóng; \n k) Mức đóng hàng tháng của đối tượng quy định tại khoản 5 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do đối tượng đóng theo hộ gia đình. \n 2. Trường hợp một người đồng thời thuộc nhiều đối tượng tham gia bảo hiểm y tế khác nhau quy định tại Điều 12 của Luật này thì đóng bảo hiểm y tế theo đối tượng đầu tiên mà người đó được xác định theo thứ tự của các đối tượng quy định tại Điều 12 của Luật này. \n Trường hợp đối tượng quy định tại điểm a khoản 1 Điều 12 của Luật này có thêm một hoặc nhiều hợp đồng lao động không xác định thời hạn hoặc hợp đồng lao động có thời hạn từ đủ 3 tháng trở lên thì đóng bảo hiểm y tế theo hợp đồng lao động có mức tiền lương cao nhất. \n Trường hợp đối tượng quy định tại điểm b khoản 1 Điều 12 của Luật này đồng thời thuộc nhiều đối tượng tham gia bảo hiểm y tế khác nhau quy định tại Điều 12 của Luật này thì đóng bảo hiểm y tế theo thứ tự như sau: do tổ chức bảo hiểm xã hội đóng, do ngân sách nhà nước đóng, do đối tượng và Ủy ban nhân dân cấp xã đóng. \n 3. Tất cả thành viên thuộc hộ gia đình theo quy định tại khoản 5 Điều 12 của Luật này phải tham gia bảo hiểm y tế. Mức đóng được giảm dần từ thành viên thứ hai trở đi, cụ thể như sau: \n a) Người thứ nhất đóng tối đa bằng 6% mức lương cơ sở; \n b) Người thứ hai, thứ ba, thứ tư đóng lần lượt bằng 70%, 60%, 50% mức đóng của người thứ nhất; \n c) Từ người thứ năm trở đi đóng bằng 40% mức đóng của người thứ nhất. \n 4. Chính phủ quy định cụ thể mức đóng, mức hỗ trợ quy định tại Điều này.",
+      "Điều 20.2.LQ.139. Nghỉ thai sản\n(Điều 139 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Lao động nữ được nghỉ thai sản trước và sau khi sinh con là 06 tháng; thời gian nghỉ trước khi sinh không quá 02 tháng. \n Trường hợp lao động nữ sinh đôi trở lên thì tính từ con thứ 02 trở đi, cứ mỗi con, người mẹ được nghỉ thêm 01 tháng. \n 2. Trong thời gian nghỉ thai sản, lao động nữ được hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội. \n 3. Hết thời gian nghỉ thai sản theo quy định tại khoản 1 Điều này, nếu có nhu cầu, lao động nữ có thể nghỉ thêm một thời gian không hưởng lương sau khi thỏa thuận với người sử dụng lao động. \n 4. Trước khi hết thời gian nghỉ thai sản theo quy định tại khoản 1 Điều này, lao động nữ có thể trở lại làm việc khi đã nghỉ ít nhất được 04 tháng nhưng người lao động phải báo trước, được người sử dụng lao động đồng ý và có xác nhận của cơ sở khám bệnh, chữa bệnh có thẩm quyền về việc đi làm sớm không có hại cho sức khỏe của người lao động. Trong trường hợp này, ngoài tiền lương của những ngày làm việc do người sử dụng lao động trả, lao động nữ vẫn tiếp tục được hưởng trợ cấp thai sản theo quy định của pháp luật về bảo hiểm xã hội. \n 5. Lao động nam khi vợ sinh con, người lao động nhận nuôi con nuôi dưới 06 tháng tuổi, lao động nữ mang thai hộ và người lao động là người mẹ nhờ mang thai hộ được nghỉ việc hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội."
+    ],
+    "ground_truth_dieu": [
+      "Điều 2.2.LQ.13",
+      "Điều 20.2.LQ.139"
+    ],
+    "source_documents": [
+      "Luật số 25/2008/QH12",
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Bảo hiểm y tế",
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "583b913f-4d4b-46da-911c-112342c6ea49",
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "cross_domain",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Bằng chứng nằm ở HAI đề mục khác nhau. Retriever thiên về một đề mục sẽ tụt context_recall. Đây là câu quan trọng nhất để biện minh cho hybrid search."
+  },
+  {
+    "id": "Q12",
+    "question": "Mức đóng bảo hiểm y tế hằng tháng của người lao động làm việc theo hợp đồng lao động là bao nhiêu, người sử dụng lao động và người lao động chia nhau thế nào?",
+    "expected_answer": "Tối đa bằng 6% tiền lương tháng, trong đó người sử dụng lao động đóng 2/3 và người lao động đóng 1/3.",
+    "expected_context": "Đề mục Bảo hiểm y tế — Điều 2.2.LQ.13 khoản 1 điểm a",
+    "reference_contexts": [
+      "Điều 2.2.LQ.13. Mức đóng và trách nhiệm đóng bảo hiểm y tế\n(Điều 13 Luật số 25/2008/QH12, có hiệu lực thi hành kể từ ngày 01/07/2009)\n1. Mức đóng và trách nhiệm đóng bảo hiểm y tế được quy định như sau: \n a) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 1 Điều 12 của Luật này tối đa bằng 6% tiền lương tháng, trong đó người sử dụng lao động đóng 2/3 và người lao động đóng 1/3. Trong thời gian người lao động nghỉ việc hưởng chế độ thai sản theo quy định của pháp luật về bảo hiểm xã hội thì mức đóng hằng tháng tối đa bằng 6% tiền lương tháng của người lao động trước khi nghỉ thai sản và do tổ chức bảo hiểm xã hội đóng; \n b) Mức đóng hàng tháng của đối tượng quy định tại điểm b khoản 1 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở, trong đó người sử dụng lao động đóng 2/3 và người lao động đóng 1/3; \n c) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 2 Điều 12 của Luật này tối đa bằng 6% tiền lương hưu, trợ cấp mất sức lao động và do tổ chức bảo hiểm xã hội đóng; \n d) Mức đóng hàng tháng của đối tượng quy định tại điểm b và điểm c khoản 2 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do tổ chức bảo hiểm xã hội đóng; \n đ) Mức đóng hàng tháng của đối tượng quy định tại điểm d khoản 2 Điều 12 của Luật này tối đa bằng 6% tiền trợ cấp thất nghiệp và do tổ chức bảo hiểm xã hội đóng; \n e) Mức đóng hàng tháng của đối tượng quy định tại điểm a khoản 3 Điều 12 của Luật này tối đa bằng 6% tiền lương tháng đối với người hưởng lương, tối đa bằng 6% mức lương cơ sở đối với người hưởng sinh hoạt phí và do ngân sách nhà nước đóng; \n g) Mức đóng hàng tháng của đối tượng quy định tại các điểm b, c, d, đ, e, g, h, i, k, l và m khoản 3 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do ngân sách nhà nước đóng; \n h) Mức đóng hàng tháng của đối tượng quy định tại điểm n khoản 3 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do cơ quan, tổ chức, đơn vị cấp học bổng đóng; \n i) Mức đóng hàng tháng của đối tượng quy định tại khoản 4 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở do đối tượng tự đóng và được ngân sách nhà nước hỗ trợ một phần mức đóng; \n k) Mức đóng hàng tháng của đối tượng quy định tại khoản 5 Điều 12 của Luật này tối đa bằng 6% mức lương cơ sở và do đối tượng đóng theo hộ gia đình. \n 2. Trường hợp một người đồng thời thuộc nhiều đối tượng tham gia bảo hiểm y tế khác nhau quy định tại Điều 12 của Luật này thì đóng bảo hiểm y tế theo đối tượng đầu tiên mà người đó được xác định theo thứ tự của các đối tượng quy định tại Điều 12 của Luật này. \n Trường hợp đối tượng quy định tại điểm a khoản 1 Điều 12 của Luật này có thêm một hoặc nhiều hợp đồng lao động không xác định thời hạn hoặc hợp đồng lao động có thời hạn từ đủ 3 tháng trở lên thì đóng bảo hiểm y tế theo hợp đồng lao động có mức tiền lương cao nhất. \n Trường hợp đối tượng quy định tại điểm b khoản 1 Điều 12 của Luật này đồng thời thuộc nhiều đối tượng tham gia bảo hiểm y tế khác nhau quy định tại Điều 12 của Luật này thì đóng bảo hiểm y tế theo thứ tự như sau: do tổ chức bảo hiểm xã hội đóng, do ngân sách nhà nước đóng, do đối tượng và Ủy ban nhân dân cấp xã đóng. \n 3. Tất cả thành viên thuộc hộ gia đình theo quy định tại khoản 5 Điều 12 của Luật này phải tham gia bảo hiểm y tế. Mức đóng được giảm dần từ thành viên thứ hai trở đi, cụ thể như sau: \n a) Người thứ nhất đóng tối đa bằng 6% mức lương cơ sở; \n b) Người thứ hai, thứ ba, thứ tư đóng lần lượt bằng 70%, 60%, 50% mức đóng của người thứ nhất; \n c) Từ người thứ năm trở đi đóng bằng 40% mức đóng của người thứ nhất. \n 4. Chính phủ quy định cụ thể mức đóng, mức hỗ trợ quy định tại Điều này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 2.2.LQ.13"
+    ],
+    "source_documents": [
+      "Luật số 25/2008/QH12"
+    ],
+    "de_muc": [
+      "Bảo hiểm y tế"
+    ],
+    "de_muc_id": [
+      "583b913f-4d4b-46da-911c-112342c6ea49"
+    ],
+    "capability": "numeric_precision",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Test giữ đúng tỷ lệ phân chia 2/3–1/3, dễ bị LLM đảo ngược."
+  },
+  {
+    "id": "Q13",
+    "question": "Luật số 25/2008/QH12 điều chỉnh lĩnh vực gì và có hiệu lực thi hành từ ngày nào?",
+    "expected_answer": "Luật số 25/2008/QH12 là Luật Bảo hiểm y tế ngày 14/11/2008 của Quốc hội, có hiệu lực thi hành kể từ ngày 01/07/2009. Luật quy định về chế độ, chính sách bảo hiểm y tế: đối tượng, mức đóng, trách nhiệm và phương thức đóng; thẻ bảo hiểm y tế; phạm vi được hưởng; tổ chức khám chữa bệnh; thanh toán chi phí; quỹ bảo hiểm y tế; quyền và trách nhiệm các bên. Luật không áp dụng với bảo hiểm y tế mang tính kinh doanh.",
+    "expected_context": "Đề mục Bảo hiểm y tế — Điều 2.2.LQ.1 và phần ghi chú nguồn",
+    "reference_contexts": [
+      "Điều 2.2.LQ.1. Phạm vi điều chỉnh và đối tượng áp dụng\n(Điều 1 Luật số 25/2008/QH12 Bảo hiểm y tế ngày 14/11/2008 của Quốc hội, có hiệu lực thi hành kể từ ngày 01/07/2009 )\n1. Luật này quy định về chế độ, chính sách bảo hiểm y tế, bao gồm đối tượng, mức đóng, trách nhiệm và phương thức đóng bảo hiểm y tế; thẻ bảo hiểm y tế; phạm vi được hưởng bảo hiểm y tế; tổ chức khám bệnh, chữa bệnh cho người tham gia bảo hiểm y tế; thanh toán chi phí khám bệnh, chữa bệnh bảo hiểm y tế; quỹ bảo hiểm y tế; quyền và trách nhiệm của các bên liên quan đến bảo hiểm y tế. \n 2. Luật này áp dụng đối với tổ chức, cá nhân trong nước và tổ chức, cá nhân nước ngoài tại Việt Nam có liên quan đến bảo hiểm y tế. \n 3. Luật này không áp dụng đối với bảo hiểm y tế mang tính kinh doanh."
+    ],
+    "ground_truth_dieu": [
+      "Điều 2.2.LQ.1"
+    ],
+    "source_documents": [
+      "Luật số 25/2008/QH12"
+    ],
+    "de_muc": [
+      "Bảo hiểm y tế"
+    ],
+    "de_muc_id": [
+      "583b913f-4d4b-46da-911c-112342c6ea49"
+    ],
+    "capability": "lexical_exact",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Truy vấn bằng SỐ HIỆU văn bản. Embedding dense xử lý chuỗi số rất kém → BM25/lexical phải gánh. Câu này là bằng chứng trực tiếp cho giá trị của Task 6."
+  },
+  {
+    "id": "Q14",
+    "question": "Điều 20.2.LQ.26 trong Bộ pháp điển quy định nội dung gì?",
+    "expected_answer": "Điều 20.2.LQ.26 quy định về tiền lương thử việc: tiền lương của người lao động trong thời gian thử việc do hai bên thỏa thuận nhưng ít nhất phải bằng 85% mức lương của công việc đó.",
+    "expected_context": "Đề mục Lao động — Điều 20.2.LQ.26",
+    "reference_contexts": [
+      "Điều 20.2.LQ.26. Tiền lương thử việc\n(Điều 26 Bộ luật số 45/2019/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\nTiền lương của người lao động trong thời gian thử việc do hai bên thỏa thuận nhưng ít nhất phải bằng 85% mức lương của công việc đó."
+    ],
+    "ground_truth_dieu": [
+      "Điều 20.2.LQ.26"
+    ],
+    "source_documents": [
+      "Bộ luật số 45/2019/QH14"
+    ],
+    "de_muc": [
+      "Lao động"
+    ],
+    "de_muc_id": [
+      "2efd8c6f-509f-4207-84b6-6b22ff780f2a"
+    ],
+    "capability": "lexical_exact",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Tra cứu theo MÃ ĐIỀU pháp điển. Chỉ đúng nếu chunk giữ được mã điều trong text hoặc metadata. Nếu fail → cần đưa dieu_id vào metadata khi indexing (Task 4)."
+  },
+  {
+    "id": "Q15",
+    "question": "Điều kiện kết hôn theo pháp luật Việt Nam hiện nay là gì?",
+    "expected_answer": "Nam từ đủ 20 tuổi trở lên, nữ từ đủ 18 tuổi trở lên; việc kết hôn do nam và nữ tự nguyện quyết định; không bị mất năng lực hành vi dân sự; và việc kết hôn không thuộc các trường hợp bị cấm tại các điểm a, b, c, d khoản 2 Điều 5 Luật Hôn nhân và gia đình.",
+    "expected_context": "Đề mục Hôn nhân và gia đình — Điều 8.4.LQ.8 khoản 1",
+    "reference_contexts": [
+      "Điều 8.4.LQ.8. Điều kiện kết hôn\n(Điều 8 Luật số 52/2014/QH13, có hiệu lực thi hành kể từ ngày 01/01/2015)\n1. Nam, nữ kết hôn với nhau phải tuân theo các điều kiện sau đây: \n a) Nam từ đủ 20 tuổi trở lên, nữ từ đủ 18 tuổi trở lên; \n b) Việc kết hôn do nam và nữ tự nguyện quyết định; \n c) Không bị mất năng lực hành vi dân sự; \n d) Việc kết hôn không thuộc một trong các trường hợp cấm kết hôn theo quy định tại các điểm a, b, c và d khoản 2 Điều 5 của Luật này. \n 2. Nhà nước không thừa nhận hôn nhân giữa những người cùng giới tính."
+    ],
+    "ground_truth_dieu": [
+      "Điều 8.4.LQ.8"
+    ],
+    "source_documents": [
+      "Luật số 52/2014/QH13"
+    ],
+    "de_muc": [
+      "Hôn nhân và gia đình"
+    ],
+    "de_muc_id": [
+      "4913a1cf-5f78-471c-a807-ed5f8c57aaee"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Baseline cho đề mục Hôn nhân gia đình. Lưu ý 'từ đủ 20/18 tuổi' — bỏ chữ 'đủ' là sai về pháp lý."
+  },
+  {
+    "id": "Q16",
+    "question": "Tôi nghe nói Nhà nước Việt Nam đã thừa nhận hôn nhân giữa những người cùng giới tính, đúng không?",
+    "expected_answer": "Không đúng. Khoản 2 Điều 8 Luật Hôn nhân và gia đình số 52/2014/QH13 quy định rõ: Nhà nước không thừa nhận hôn nhân giữa những người cùng giới tính.",
+    "expected_context": "Đề mục Hôn nhân và gia đình — Điều 8.4.LQ.8 khoản 2",
+    "reference_contexts": [
+      "Điều 8.4.LQ.8. Điều kiện kết hôn\n(Điều 8 Luật số 52/2014/QH13, có hiệu lực thi hành kể từ ngày 01/01/2015)\n1. Nam, nữ kết hôn với nhau phải tuân theo các điều kiện sau đây: \n a) Nam từ đủ 20 tuổi trở lên, nữ từ đủ 18 tuổi trở lên; \n b) Việc kết hôn do nam và nữ tự nguyện quyết định; \n c) Không bị mất năng lực hành vi dân sự; \n d) Việc kết hôn không thuộc một trong các trường hợp cấm kết hôn theo quy định tại các điểm a, b, c và d khoản 2 Điều 5 của Luật này. \n 2. Nhà nước không thừa nhận hôn nhân giữa những người cùng giới tính."
+    ],
+    "ground_truth_dieu": [
+      "Điều 8.4.LQ.8"
+    ],
+    "source_documents": [
+      "Luật số 52/2014/QH13"
+    ],
+    "de_muc": [
+      "Hôn nhân và gia đình"
+    ],
+    "de_muc_id": [
+      "4913a1cf-5f78-471c-a807-ed5f8c57aaee"
+    ],
+    "capability": "false_premise",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Tiền đề SAI trong câu hỏi. Hệ thống phải PHỦ ĐỊNH, không được 'gật theo' người dùng (sycophancy). Chấm thủ công: đạt nếu câu trả lời bác bỏ tiền đề."
+  },
+  {
+    "id": "Q17",
+    "question": "Mức giảm trừ gia cảnh cho bản thân người nộp thuế thu nhập cá nhân là bao nhiêu một tháng?",
+    "expected_answer": "Theo văn bản trong Bộ pháp điển (Điều 19 Luật Thuế thu nhập cá nhân số 04/2007/QH12): 9 triệu đồng/tháng (108 triệu đồng/năm) cho người nộp thuế và 3,6 triệu đồng/tháng cho mỗi người phụ thuộc. TUY NHIÊN khoản 1 Điều này ĐÃ ĐƯỢC SỬA ĐỔI, BỔ SUNG theo khoản 4 Điều 6 Luật số 71/2014/QH13 (hiệu lực 01/01/2015), và mức giảm trừ còn được Ủy ban Thường vụ Quốc hội điều chỉnh khi CPI biến động trên 20%. Cần kiểm tra văn bản hiện hành trước khi áp dụng.",
+    "expected_context": "Đề mục Thuế thu nhập cá nhân — Điều 33.1.LQ.19 (gồm ghi chú sửa đổi) + Điều 33.1.NĐ.1.12",
+    "reference_contexts": [
+      "Điều 33.1.LQ.19. Giảm trừ gia cảnh\n(Điều 19 Luật số 04/2007/QH12, có hiệu lực thi hành kể từ ngày 01/01/2009)\n1. Giảm trừ gia cảnh là số tiền được trừ vào thu nhập chịu thuế trước khi tính thuế đối với thu nhập từ kinh doanh, tiền lương, tiền công của đối tượng nộp thuế là cá nhân cư trú. Giảm trừ gia cảnh gồm hai phần sau đây: \n a) Mức giảm trừ đối với đối tượng nộp thuế là 9 triệu đồng/tháng (108 triệu \n đồng/năm); \n b) Mức giảm trừ đối với mỗi người phụ thuộc là 3,6 triệu đồng/tháng. \n Trường hợp chỉ số giá tiêu dùng (CPI) biến động trên 20% so với thời điểm \n Luật có hiệu lực thi hành hoặc thời điểm điều chỉnh mức giảm trừ gia cảnh gần nhất thì Chính phủ trình Ủy ban thường vụ Quốc hội điều chỉnh mức giảm trừ gia cảnh quy định tại khoản này phù hợp với biến động của giá cả để áp dụng cho kỳ tính thuế tiếp theo. \n 2. Việc xác định mức giảm trừ gia cảnh đối với người phụ thuộc thực hiện theo nguyên tắc mỗi người phụ thuộc chỉ được tính giảm trừ một lần vào một đối tượng nộp thuế. \n 3. Người phụ thuộc là người mà đối tượng nộp thuế có trách nhiệm nuôi dưỡng, bao gồm: \n a) Con chưa thành niên; con bị tàn tật, không có khả năng lao động; \n b) Các cá nhân không có thu nhập hoặc có thu nhập không vượt quá mức quy định, bao gồm con thành niên đang học đại học, cao đẳng, trung học chuyên nghiệp hoặc học nghề; vợ hoặc chồng không có khả năng lao động; bố, mẹ đã hết tuổi lao động hoặc không có khả năng lao động; những người khác không nơi nương tựa mà người nộp thuế phải trực tiếp nuôi dưỡng. \n Chính phủ quy định mức thu nhập, kê khai để xác định người phụ thuộc được tính giảm trừ gia cảnh. \n (Khoản 1 Điều này được sửa đổi bổ sung theo quy định tại khoản 4 Điều 6 của Luật số 71/2014/QH13, có hiệu lực kể từ ngày 01/01/2015)",
+      "Điều 33.1.NĐ.1.12. Giảm trừ gia cảnh\n(Điều 12 Nghị định số 65/2013/NĐ-CP, có hiệu lực thi hành kể từ ngày 01/07/2013)\nCá nhân cư trú có thu nhập tiền lương, tiền công được giảm trừ gia cảnh vào thu nhập chịu thuế trước khi tính thuế như sau: \n 1. Mức giảm trừ gia cảnh: \n a) Mức giảm trừ đối với người nộp thuế là 9 triệu đồng/tháng (108 triệu đồng/năm); \n b) Mức giảm trừ cho mỗi người phụ thuộc mà người nộp thuế có nghĩa vụ nuôi dưỡng là 3,6 triệu đồng/tháng kể từ tháng phát sinh nghĩa vụ nuôi dưỡng. \n Trường hợp Ủy ban Thường vụ Quốc hội điều chỉnh mức giảm trừ gia cảnh theo quy định tại Khoản 4 Điều 1 Luật sửa đổi, bổ sung một số điều của Luật thuế thu nhập cá nhân thì thực hiện theo mức do Ủy ban Thường vụ Quốc hội quy định để áp dụng cho kỳ tính thuế tiếp theo. \n 2. Mỗi người phụ thuộc chỉ được tính giảm trừ một lần vào một người nộp thuế trong năm tính thuế. Trường hợp nhiều người nộp thuế có chung người phụ thuộc phải nuôi dưỡng thì phải tự thỏa thuận để đăng ký giảm trừ gia cảnh vào một người nộp thuế. \n 3. Đối tượng và căn cứ xác định người phụ thuộc mà người nộp thuế có nghĩa vụ nuôi dưỡng quy định tại Khoản 1 Điều này như sau: \n a) Con (bao gồm con đẻ, con nuôi hợp pháp, con riêng của vợ, con riêng của chồng) dưới 18 tuổi; \n b) Con (bao gồm con đẻ, con nuôi hợp pháp, con riêng của vợ, con riêng của chồng) từ 18 tuổi trở lên bị khuyết tật không có khả năng lao động; \n c) Con (bao gồm con đẻ, con nuôi hợp pháp, con riêng của vợ, con riêng của chồng) đang học đại học, cao đẳng, trung học chuyên nghiệp, dạy nghề, kể cả con từ 18 tuổi trở lên đang học bậc học phổ thông mà không có thu nhập hoặc có thu nhập không vượt quá mức thu nhập quy định tại Khoản 4 Điều này; \n d) Người ngoài độ tuổi lao động, người trong độ tuổi lao động theo quy định của pháp luật nhưng bị khuyết tật không có khả năng lao động mà không có thu nhập hoặc có thu nhập nhưng không vượt quá mức thu nhập quy định tại Khoản 4 Điều này, bao gồm: \n - Vợ hoặc chồng của người nộp thuế; \n - Cha đẻ, mẹ đẻ, cha dượng, mẹ kế, cha mẹ nuôi hợp pháp, cha vợ, mẹ vợ (hoặc cha chồng, mẹ chồng) của người nộp thuế; \n - Cá nhân khác không nơi nương tựa mà người nộp thuế phải trực tiếp nuôi dưỡng. \n 4. Mức thu nhập làm căn cứ xác định người phụ thuộc được áp dụng giảm trừ là mức thu nhập bình quân tháng trong năm từ tất cả các nguồn thu nhập không vượt quá 1.000.000 đồng. \n 5. Người nộp thuế tự kê khai số lượng người phụ thuộc kèm theo giấy tờ hợp pháp và tự chịu trách nhiệm trước pháp luật về tính chính xác của việc kê khai. \n 6. Bộ Tài chính quy định thủ tục, hồ sơ kê khai người phụ thuộc được giảm trừ gia cảnh quy định tại Điều này. \n ( Quy định về “thu nhập từ kinh doanh” tại Điều này được bãi bỏ theo quy định tại Khoản 4 Điều 6 Nghị định số 12/2015/NĐ-CP , có hiệu lực từ ngày 01 tháng 01 năm 2015 )"
+    ],
+    "ground_truth_dieu": [
+      "Điều 33.1.LQ.19",
+      "Điều 33.1.NĐ.1.12"
+    ],
+    "source_documents": [
+      "Luật số 04/2007/QH12",
+      "Nghị định số 65/2013/NĐ-CP"
+    ],
+    "de_muc": [
+      "Thuế thu nhập cá nhân"
+    ],
+    "de_muc_id": [
+      "ab116df3-d3ed-4a95-95bf-0d6b8962e724"
+    ],
+    "capability": "temporal_amendment",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "BẪY QUAN TRỌNG: corpus ghi 9 triệu, nhưng ngay trong text có ghi chú điều khoản đã bị sửa đổi bởi Luật 71/2014/QH13. Thực tế mức hiện hành là 11 triệu (Nghị quyết 954/2020/UBTVQH14) — KHÔNG có trong corpus. Đạt: nêu con số trong corpus VÀ cảnh báo đã bị sửa đổi. Trượt: khẳng định 9 triệu là mức hiện hành. Đây là câu đo 'citation-awareness' — quan trọng bậc nhất với trợ lý pháp lý."
+  },
+  {
+    "id": "Q18",
+    "question": "Điều kiện để đăng ký thường trú tại thành phố trực thuộc trung ương là gì?",
+    "expected_answer": "Theo Điều 20 Luật Cư trú số 81/2006/QH11 (hiệu lực 01/07/2007, sửa đổi bởi Luật số 36/2013/QH13) trong Bộ pháp điển: có chỗ ở hợp pháp và tạm trú từ 01 năm trở lên (đăng ký vào huyện, thị xã) hoặc từ 02 năm trở lên (đăng ký vào quận); hoặc được người có sổ hộ khẩu đồng ý cho nhập khẩu trong các trường hợp thân nhân; hoặc được điều động, tuyển dụng đến làm việc và có chỗ ở hợp pháp; hoặc trước đây đã đăng ký thường trú tại thành phố đó nay trở về. LƯU Ý: đây là quy định theo Luật Cư trú 2006 — cần đối chiếu văn bản hiện hành vì quy định về sổ hộ khẩu đã thay đổi.",
+    "expected_context": "Đề mục Cư trú — Điều 39.3.LQ.20 (Luật số 81/2006/QH11, sửa đổi bởi Luật số 36/2013/QH13)",
+    "reference_contexts": [
+      "Điều 39.3.LQ.20. Điều kiện đăng ký thường trú tại thành phố trực thuộc trung ương\n( Điều 20 Luật số 81/2006/QH11, có hiệu lực thi hành kể từ ngày 01/07/2007, có nội dung được sửa đổi, có nội dung được bổ sung bởi Điều 1 Luật số 36/2013/QH13 có hiệu lực thi hành kể từ ngày 01/01/2014)\nCông dân thuộc một trong những trường hợp sau đây thì được đăng ký thường trú tại thành phố trực thuộc trung ương: \n 1. Có chỗ ở hợp pháp, trường hợp đăng ký thường trú vào huyện, thị xã thuộc thành phố trực thuộc trung ương thì phải có thời gian tạm trú tại thành phố đó từ một năm trở lên, trường hợp đăng ký thường trú vào quận thuộc thành phố trực thuộc trung ương thì phải có thời gian tạm trú tại thành phố đó từ hai năm trở lên; \n 2. Được người có sổ hộ khẩu đồng ý cho nhập vào sổ hộ khẩu của mình nếu thuộc một trong các trường hợp sau đây: \n a) Vợ về ở với chồng; chồng về ở với vợ; con về ở với cha, mẹ; cha, mẹ về ở với con; \n b) Người hết tuổi lao động, nghỉ hưu, nghỉ mất sức, nghỉ thôi việc về ở với anh, chị, em ruột; \n c) Người khuyết tật, mất khả năng lao động, người bị bệnh tâm thần hoặc bệnh khác làm mất khả năng nhận thức, khả năng điều khiển hành vi về ở với anh, chị, em ruột, cô, dì, chú, bác, cậu ruột, người giám hộ; \n d) Người chưa thành niên không còn cha, mẹ hoặc còn cha, mẹ nhưng cha, mẹ không có khả năng nuôi dưỡng về ở với ông, bà nội, ngoại, anh, chị, em ruột, cô, dì, chú, bác, cậu ruột, người giám hộ; \n đ) Người thành niên độc thân về ở với ông, bà nội, ngoại, anh, chị, em ruột, cô, dì, chú, bác, cậu ruột; \n e) Ông bà nội, ngoại về ở với cháu ruột; \n 3. Được điều động, tuyển dụng đến làm việc tại cơ quan, tổ chức hưởng lương từ ngân sách nhà nước hoặc theo chế độ hợp đồng không xác định thời hạn và có chỗ ở hợp pháp; \n 4. Trước đây đã đăng ký thường trú tại thành phố trực thuộc trung ương, nay trở về thành phố đó sinh sống tại chỗ ở hợp pháp của mình; \n 5. Trường hợp quy định tại các khoản 1, 3 và 4 Điều này đăng ký thường trú vào chỗ ở hợp pháp do thuê, mượn, ở nhờ của cá nhân, tổ chức thì phải có đủ các điều kiện sau đây: \n a) Bảo đảm điều kiện về diện tích bình quân theo quy định của Hội đồng nhân dân thành phố; \n b) Có xác nhận của Ủy ban nhân dân xã, phường, thị trấn về điều kiện diện tích bình quân; \n c) Được người cho thuê, cho mượn, cho ở nhờ đồng ý bằng văn bản; \n 6. Việc đăng ký thường trú vào nội thành thành phố Hà Nội thực hiện theo quy định tại khoản 4 Điều 19 của Luật Thủ đô."
+    ],
+    "ground_truth_dieu": [
+      "Điều 39.3.LQ.20"
+    ],
+    "source_documents": [
+      "Luật số 81/2006/QH11"
+    ],
+    "de_muc": [
+      "Cư trú"
+    ],
+    "de_muc_id": [
+      "6a501e4a-ba3f-40e2-902f-af4a52b14bb4"
+    ],
+    "capability": "stale_law_trap",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "BẪY: corpus chỉ có Luật Cư trú 2006 (đã được thay bằng Luật Cư trú 68/2020/QH14; sổ hộ khẩu giấy bỏ từ 01/01/2023). Đạt: trả lời theo corpus NHƯNG nêu rõ nguồn là Luật 2006 + khuyến cáo đối chiếu. Trượt: trình bày như luật hiện hành mà không nói nguồn/ngày hiệu lực."
+  },
+  {
+    "id": "Q19",
+    "question": "Các hành vi bị nghiêm cấm về an ninh mạng gồm những gì?",
+    "expected_answer": "Theo Điều 8 Luật An ninh mạng số 24/2018/QH14: (1) sử dụng không gian mạng để thực hiện các hành vi tại khoản 1 Điều 18; tổ chức, câu kết, xúi giục, mua chuộc, lừa gạt, lôi kéo, đào tạo người chống Nhà nước; xuyên tạc lịch sử, phủ nhận thành tựu cách mạng, phá hoại khối đại đoàn kết, xúc phạm tôn giáo, phân biệt đối xử về giới, phân biệt chủng tộc; thông tin sai sự thật gây hoang mang trong Nhân dân; hoạt động mại dâm, tệ nạn xã hội, mua bán người, đăng tải thông tin dâm ô đồi trụy; xúi giục, lôi kéo, kích động người khác phạm tội. (2) Thực hiện tấn công mạng, khủng bố mạng, gián điệp mạng, tội phạm mạng; gây sự cố, xâm nhập, chiếm quyền điều khiển, làm sai lệch, gián đoạn, tê liệt hoặc phá hoại hệ thống thông tin quan trọng về an ninh quốc gia. (3) Sản xuất, đưa vào sử dụng công cụ, phương tiện, phần mềm hoặc cản trở, gây rối loạn hoạt động mạng; phát tán chương trình tin học gây hại; xâm nhập trái phép vào mạng, hệ thống thông tin, cơ sở dữ liệu của người khác. (4) Chống lại hoặc cản trở hoạt động của lực lượng bảo vệ an ninh mạng; tấn công, vô hiệu hóa trái pháp luật làm mất tác dụng biện pháp bảo vệ an ninh mạng. (5) Lợi dụng hoặc lạm dụng hoạt động bảo vệ an ninh mạng để xâm phạm chủ quyền, lợi ích, an ninh quốc gia, trật tự an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân hoặc để trục lợi. (6) Hành vi khác vi phạm quy định của Luật này.",
+    "expected_context": "Đề mục An ninh mạng — Điều 1.11.LQ.8, toàn bộ các khoản",
+    "reference_contexts": [
+      "Điều 1.11.LQ.8. Các hành vi bị nghiêm cấm về an ninh mạng\n(Điều 8 Luật số 24/2018/QH14, có hiệu lực thi hành kể từ ngày 01/01/2019)\n1. Sử dụng không gian mạng để thực hiện hành vi sau đây: \n a) Hành vi quy định tại khoản 1 Điều 18 của Luật này; \n b) Tổ chức, hoạt động, câu kết, xúi giục, mua chuộc, lừa gạt, lôi kéo, đào tạo, huấn luyện người chống Nhà nước Cộng hòa xã hội chủ nghĩa Việt Nam; \n c) Xuyên tạc lịch sử, phủ nhận thành tựu cách mạng, phá hoại khối đại đoàn kết toàn dân tộc, xúc phạm tôn giáo, phân biệt đối xử về giới, phân biệt chủng tộc; \n d) Thông tin sai sự thật gây hoang mang trong Nhân dân, gây thiệt hại cho hoạt động kinh tế - xã hội, gây khó khăn cho hoạt động của cơ quan nhà nước hoặc người thi hành công vụ, xâm phạm quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân khác; \n đ) Hoạt động mại dâm, tệ nạn xã hội, mua bán người; đăng tải thông tin dâm ô, đồi trụy, tội ác; phá hoại thuần phong, mỹ tục của dân tộc, đạo đức xã hội, sức khỏe của cộng đồng; \n e) Xúi giục, lôi kéo, kích động người khác phạm tội. \n 2. Thực hiện tấn công mạng, khủng bố mạng, gián điệp mạng, tội phạm mạng; gây sự cố, tấn công, xâm nhập, chiếm quyền điều khiển, làm sai lệch, gián đoạn, ngưng trệ, tê liệt hoặc phá hoại hệ thống thông tin quan trọng về an ninh quốc gia. \n 3. Sản xuất, đưa vào sử dụng công cụ, phương tiện, phần mềm hoặc có hành vi cản trở, gây rối loạn hoạt động của mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, phương tiện điện tử; phát tán chương trình tin học gây hại cho hoạt động của mạng viễn thông, mạng Internet, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, phương tiện điện tử; xâm nhập trái phép vào mạng viễn thông, mạng máy tính, hệ thống thông tin, hệ thống xử lý và điều khiển thông tin, cơ sở dữ liệu, phương tiện điện tử của người khác. \n 4. Chống lại hoặc cản trở hoạt động của lực lượng bảo vệ an ninh mạng; tấn công, vô hiệu hóa trái pháp luật làm mất tác dụng biện pháp bảo vệ an ninh mạng. \n 5. Lợi dụng hoặc lạm dụng hoạt động bảo vệ an ninh mạng để xâm phạm chủ quyền, lợi ích, an ninh quốc gia, trật tự, an toàn xã hội, quyền và lợi ích hợp pháp của cơ quan, tổ chức, cá nhân hoặc để trục lợi. \n 6. Hành vi khác vi phạm quy định của Luật này."
+    ],
+    "ground_truth_dieu": [
+      "Điều 1.11.LQ.8"
+    ],
+    "source_documents": [
+      "Luật số 24/2018/QH14"
+    ],
+    "de_muc": [
+      "An ninh mạng"
+    ],
+    "de_muc_id": [
+      "1fd42d83-9d78-4dd4-b6b6-73e9bd3472e1"
+    ],
+    "capability": "enumeration",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Điều DÀI, chắc chắn bị cắt thành nhiều chunk. Cần retriever lấy được NHIỀU chunk của cùng một điều. Nếu top_k nhỏ hoặc rerank ưu tiên đa dạng (MMR) thì sẽ mất khoản cuối → context_recall thấp. Câu này đo trực tiếp chất lượng chunking (Task 4) và top_k (Task 10)."
+  },
+  {
+    "id": "Q20",
+    "question": "Doanh nghiệp cung cấp dịch vụ trên mạng Internet có trách nhiệm gì trong việc bảo vệ trẻ em trên không gian mạng?",
+    "expected_answer": "Phải kiểm soát nội dung thông tin trên hệ thống hoặc dịch vụ của mình để không gây nguy hại cho trẻ em, không xâm phạm trẻ em và quyền trẻ em; ngăn chặn việc chia sẻ và xóa bỏ thông tin có nội dung gây nguy hại cho trẻ em; kịp thời thông báo và phối hợp với lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an để xử lý.",
+    "expected_context": "Đề mục An ninh mạng — Điều 1.11.LQ.29 khoản 2",
+    "reference_contexts": [
+      "Điều 1.11.LQ.29. Bảo vệ trẻ em trên không gian mạng\n(Điều 29 Luật số 24/2018/QH14, có hiệu lực thi hành kể từ ngày 01/01/2019)\n1. Trẻ em có quyền được bảo vệ, tiếp cận thông tin, tham gia hoạt động xã hội, vui chơi, giải trí, giữ bí mật cá nhân, đời sống riêng tư và các quyền khác khi tham gia trên không gian mạng. \n 2. Chủ quản hệ thống thông tin, doanh nghiệp cung cấp dịch vụ trên mạng viễn thông, mạng Internet, các dịch vụ gia tăng trên không gian mạng có trách nhiệm kiểm soát nội dung thông tin trên hệ thống thông tin hoặc trên dịch vụ do doanh nghiệp cung cấp để không gây nguy hại cho trẻ em, xâm phạm đến trẻ em, quyền trẻ em; ngăn chặn việc chia sẻ và xóa bỏ thông tin có nội dung gây nguy hại cho trẻ em, xâm phạm đến trẻ em, quyền trẻ em; kịp thời thông báo, phối hợp với lực lượng chuyên trách bảo vệ an ninh mạng thuộc Bộ Công an để xử lý. \n 3. Cơ quan, tổ chức, cá nhân tham gia hoạt động trên không gian mạng có trách nhiệm phối hợp với cơ quan có thẩm quyền trong bảo đảm quyền của trẻ em trên không gian mạng, ngăn chặn thông tin có nội dung gây nguy hại cho trẻ em theo quy định của Luật này và pháp luật về trẻ em. \n 4. Cơ quan, tổ chức, cha mẹ, giáo viên, người chăm sóc trẻ em và cá nhân khác liên quan có trách nhiệm bảo đảm quyền của trẻ em, bảo vệ trẻ em khi tham gia không gian mạng theo quy định của pháp luật về trẻ em. \n 5. Lực lượng chuyên trách bảo vệ an ninh mạng và các cơ quan chức năng có trách nhiệm áp dụng biện pháp để phòng ngừa, phát hiện, ngăn chặn, xử lý nghiêm hành vi sử dụng không gian mạng gây nguy hại cho trẻ em, xâm phạm đến trẻ em, quyền trẻ em."
+    ],
+    "ground_truth_dieu": [
+      "Điều 1.11.LQ.29"
+    ],
+    "source_documents": [
+      "Luật số 24/2018/QH14"
+    ],
+    "de_muc": [
+      "An ninh mạng"
+    ],
+    "de_muc_id": [
+      "1fd42d83-9d78-4dd4-b6b6-73e9bd3472e1"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "medium",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Câu hỏi hướng đúng 1 khoản trong điều nhiều khoản. Test context_precision: lấy đúng khoản 2, không kéo cả điều vào context."
+  },
+  {
+    "id": "Q21",
+    "question": "Thành viên công ty TNHH hai thành viên trở lên phải góp đủ vốn đã cam kết trong thời hạn bao lâu?",
+    "expected_answer": "Trong thời hạn 90 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp, không kể thời gian vận chuyển, nhập khẩu tài sản góp vốn và thực hiện thủ tục hành chính để chuyển quyền sở hữu tài sản.",
+    "expected_context": "Đề mục Doanh nghiệp — Điều 12.1.LQ.47 khoản 2",
+    "reference_contexts": [
+      "Điều 12.1.LQ.47. Góp vốn thành lập công ty và cấp giấy chứng nhận phần vốn góp\n(Điều 47 Luật số 59/2020/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Vốn điều lệ của công ty trách nhiệm hữu hạn hai thành viên trở lên khi đăng ký thành lập doanh nghiệp là tổng giá trị phần vốn góp của các thành viên cam kết góp và ghi trong Điều lệ công ty. \n 2. Thành viên phải góp vốn cho công ty đủ và đúng loại tài sản đã cam kết khi đăng ký thành lập doanh nghiệp trong thời hạn 90 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp, không kể thời gian vận chuyển, nhập khẩu tài sản góp vốn, thực hiện thủ tục hành chính để chuyển quyền sở hữu tài sản. Trong thời hạn này, thành viên có các quyền và nghĩa vụ tương ứng với tỷ lệ phần vốn góp đã cam kết. Thành viên công ty chỉ được góp vốn cho công ty bằng loại tài sản khác với tài sản đã cam kết nếu được sự tán thành của trên 50% số thành viên còn lại. \n 3. Sau thời hạn quy định tại khoản 2 Điều này mà vẫn có thành viên chưa góp vốn hoặc chưa góp đủ phần vốn góp đã cam kết thì được xử lý như sau: \n a) Thành viên chưa góp vốn theo cam kết đương nhiên không còn là thành viên của công ty; \n b) Thành viên chưa góp đủ phần vốn góp đã cam kết có các quyền tương ứng với phần vốn góp đã góp; \n c) Phần vốn góp chưa góp của các thành viên được chào bán theo nghị quyết, quyết định của Hội đồng thành viên. \n 4. Trường hợp có thành viên chưa góp vốn hoặc chưa góp đủ số vốn đã cam kết, công ty phải đăng ký thay đổi vốn điều lệ, tỷ lệ phần vốn góp của các thành viên bằng số vốn đã góp trong thời hạn 30 ngày kể từ ngày cuối cùng phải góp đủ phần vốn góp theo quy định tại khoản 2 Điều này. Các thành viên chưa góp vốn hoặc chưa góp đủ số vốn đã cam kết phải chịu trách nhiệm tương ứng với tỷ lệ phần vốn góp đã cam kết đối với các nghĩa vụ tài chính của công ty phát sinh trong thời gian trước ngày công ty đăng ký thay đổi vốn điều lệ và tỷ lệ phần vốn góp của thành viên. \n 5. Trừ trường hợp quy định tại khoản 2 Điều này, người góp vốn trở thành thành viên của công ty kể từ thời điểm đã thanh toán phần vốn góp và những thông tin về người góp vốn quy định tại các điểm b, c và đ khoản 2 Điều 48 của Luật này được ghi đầy đủ vào sổ đăng ký thành viên. Tại thời điểm góp đủ phần vốn góp, công ty phải cấp giấy chứng nhận phần vốn góp cho thành viên tương ứng với giá trị phần vốn đã góp. \n 6. Giấy chứng nhận phần vốn góp phải bao gồm các nội dung chủ yếu sau đây: \n a) Tên, mã số doanh nghiệp, địa chỉ trụ sở chính của công ty; \n b) Vốn điều lệ của công ty; \n c) Họ, tên, địa chỉ liên lạc, quốc tịch, số giấy tờ pháp lý của cá nhân đối với thành viên là cá nhân; tên, mã số doanh nghiệp hoặc số giấy tờ pháp lý của tổ chức, địa chỉ trụ sở chính đối với thành viên là tổ chức; \n d) Phần vốn góp, tỷ lệ phần vốn góp của thành viên; \n đ) Số và ngày cấp giấy chứng nhận phần vốn góp; \n e) Họ, tên, chữ ký của người đại diện theo pháp luật của công ty. \n 7. Trường hợp giấy chứng nhận phần vốn góp bị mất, bị hư hỏng hoặc bị hủy hoại dưới hình thức khác, thành viên được công ty cấp lại giấy chứng nhận phần vốn góp theo trình tự, thủ tục quy định tại Điều lệ công ty."
+    ],
+    "ground_truth_dieu": [
+      "Điều 12.1.LQ.47"
+    ],
+    "source_documents": [
+      "Luật số 59/2020/QH14"
+    ],
+    "de_muc": [
+      "Doanh nghiệp"
+    ],
+    "de_muc_id": [
+      "319387a3-090a-47a5-82f6-a9bacbe5d341"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Baseline đề mục Doanh nghiệp; cặp với Q22."
+  },
+  {
+    "id": "Q22",
+    "question": "So sánh thời hạn góp vốn của thành viên công ty TNHH hai thành viên trở lên với thời hạn thanh toán cổ phần đã đăng ký mua của cổ đông công ty cổ phần.",
+    "expected_answer": "Cả hai đều là 90 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp. Khác biệt: với công ty cổ phần, Điều lệ công ty hoặc hợp đồng đăng ký mua cổ phần có thể quy định thời hạn NGẮN HƠN; với công ty TNHH hai thành viên trở lên, luật không nêu ngoại lệ này. Cả hai đều không tính thời gian vận chuyển, nhập khẩu tài sản và làm thủ tục chuyển quyền sở hữu.",
+    "expected_context": "Đề mục Doanh nghiệp — Điều 12.1.LQ.47 khoản 2 và Điều 12.1.LQ.113 khoản 1",
+    "reference_contexts": [
+      "Điều 12.1.LQ.47. Góp vốn thành lập công ty và cấp giấy chứng nhận phần vốn góp\n(Điều 47 Luật số 59/2020/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Vốn điều lệ của công ty trách nhiệm hữu hạn hai thành viên trở lên khi đăng ký thành lập doanh nghiệp là tổng giá trị phần vốn góp của các thành viên cam kết góp và ghi trong Điều lệ công ty. \n 2. Thành viên phải góp vốn cho công ty đủ và đúng loại tài sản đã cam kết khi đăng ký thành lập doanh nghiệp trong thời hạn 90 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp, không kể thời gian vận chuyển, nhập khẩu tài sản góp vốn, thực hiện thủ tục hành chính để chuyển quyền sở hữu tài sản. Trong thời hạn này, thành viên có các quyền và nghĩa vụ tương ứng với tỷ lệ phần vốn góp đã cam kết. Thành viên công ty chỉ được góp vốn cho công ty bằng loại tài sản khác với tài sản đã cam kết nếu được sự tán thành của trên 50% số thành viên còn lại. \n 3. Sau thời hạn quy định tại khoản 2 Điều này mà vẫn có thành viên chưa góp vốn hoặc chưa góp đủ phần vốn góp đã cam kết thì được xử lý như sau: \n a) Thành viên chưa góp vốn theo cam kết đương nhiên không còn là thành viên của công ty; \n b) Thành viên chưa góp đủ phần vốn góp đã cam kết có các quyền tương ứng với phần vốn góp đã góp; \n c) Phần vốn góp chưa góp của các thành viên được chào bán theo nghị quyết, quyết định của Hội đồng thành viên. \n 4. Trường hợp có thành viên chưa góp vốn hoặc chưa góp đủ số vốn đã cam kết, công ty phải đăng ký thay đổi vốn điều lệ, tỷ lệ phần vốn góp của các thành viên bằng số vốn đã góp trong thời hạn 30 ngày kể từ ngày cuối cùng phải góp đủ phần vốn góp theo quy định tại khoản 2 Điều này. Các thành viên chưa góp vốn hoặc chưa góp đủ số vốn đã cam kết phải chịu trách nhiệm tương ứng với tỷ lệ phần vốn góp đã cam kết đối với các nghĩa vụ tài chính của công ty phát sinh trong thời gian trước ngày công ty đăng ký thay đổi vốn điều lệ và tỷ lệ phần vốn góp của thành viên. \n 5. Trừ trường hợp quy định tại khoản 2 Điều này, người góp vốn trở thành thành viên của công ty kể từ thời điểm đã thanh toán phần vốn góp và những thông tin về người góp vốn quy định tại các điểm b, c và đ khoản 2 Điều 48 của Luật này được ghi đầy đủ vào sổ đăng ký thành viên. Tại thời điểm góp đủ phần vốn góp, công ty phải cấp giấy chứng nhận phần vốn góp cho thành viên tương ứng với giá trị phần vốn đã góp. \n 6. Giấy chứng nhận phần vốn góp phải bao gồm các nội dung chủ yếu sau đây: \n a) Tên, mã số doanh nghiệp, địa chỉ trụ sở chính của công ty; \n b) Vốn điều lệ của công ty; \n c) Họ, tên, địa chỉ liên lạc, quốc tịch, số giấy tờ pháp lý của cá nhân đối với thành viên là cá nhân; tên, mã số doanh nghiệp hoặc số giấy tờ pháp lý của tổ chức, địa chỉ trụ sở chính đối với thành viên là tổ chức; \n d) Phần vốn góp, tỷ lệ phần vốn góp của thành viên; \n đ) Số và ngày cấp giấy chứng nhận phần vốn góp; \n e) Họ, tên, chữ ký của người đại diện theo pháp luật của công ty. \n 7. Trường hợp giấy chứng nhận phần vốn góp bị mất, bị hư hỏng hoặc bị hủy hoại dưới hình thức khác, thành viên được công ty cấp lại giấy chứng nhận phần vốn góp theo trình tự, thủ tục quy định tại Điều lệ công ty.",
+      "Điều 12.1.LQ.113. Thanh toán cổ phần đã đăng ký mua khi đăng ký thành lập doanh nghiệp\n(Điều 113 Luật số 59/2020/QH14, có hiệu lực thi hành kể từ ngày 01/01/2021)\n1. Các cổ đông phải thanh toán đủ số cổ phần đã đăng ký mua trong thời hạn 90 ngày kể từ ngày được cấp Giấy chứng nhận đăng ký doanh nghiệp, trừ trường hợp Điều lệ công ty hoặc hợp đồng đăng ký mua cổ phần quy định một thời hạn khác ngắn hơn. Trường hợp cổ đông góp vốn bằng tài sản thì thời gian vận chuyển nhập khẩu, thực hiện thủ tục hành chính để chuyển quyền sở hữu tài sản đó không tính vào thời hạn góp vốn này. Hội đồng quản trị chịu trách nhiệm giám sát, đôn đốc cổ đông thanh toán đủ và đúng hạn các cổ phần đã đăng ký mua. \n 2. Trong thời hạn từ ngày công ty được cấp Giấy chứng nhận đăng ký doanh nghiệp đến ngày cuối cùng phải thanh toán đủ số cổ phần đã đăng ký mua quy định tại khoản 1 Điều này, số phiếu biểu quyết của các cổ đông được tính theo số cổ phần phổ thông đã được đăng ký mua, trừ trường hợp Điều lệ công ty có quy định khác. \n 3. Trường hợp sau thời hạn quy định tại khoản 1 Điều này, cổ đông chưa thanh toán hoặc chỉ thanh toán được một phần số cổ phần đã đăng ký mua thì thực hiện theo quy định sau đây: \n a) Cổ đông chưa thanh toán số cổ phần đã đăng ký mua đương nhiên không còn là cổ đông của công ty và không được chuyển nhượng quyền mua cổ phần đó cho người khác; \n b) Cổ đông chỉ thanh toán một phần số cổ phần đã đăng ký mua có quyền biểu quyết, nhận lợi tức và các quyền khác tương ứng với số cổ phần đã thanh toán; không được chuyển nhượng quyền mua số cổ phần chưa thanh toán cho người khác; \n c) Cổ phần chưa thanh toán được coi là cổ phần chưa bán và Hội đồng quản trị được quyền bán; \n d) Trong thời hạn 30 ngày kể từ ngày kết thúc thời hạn phải thanh toán đủ số cổ phần đã đăng ký mua theo quy định tại khoản 1 Điều này, công ty phải đăng ký điều chỉnh vốn điều lệ bằng mệnh giá số cổ phần đã được thanh toán đủ, trừ trường hợp số cổ phần chưa thanh toán đã được bán hết trong thời hạn này; đăng ký thay đổi cổ đông sáng lập. \n 4. Cổ đông chưa thanh toán hoặc chưa thanh toán đủ số cổ phần đã đăng ký mua phải chịu trách nhiệm tương ứng với tổng mệnh giá cổ phần đã đăng ký mua đối với các nghĩa vụ tài chính của công ty phát sinh trong thời hạn trước ngày công ty đăng ký điều chỉnh vốn điều lệ theo quy định tại điểm d khoản 3 Điều này. Thành viên Hội đồng quản trị, người đại diện theo pháp luật phải chịu trách nhiệm liên đới về các thiệt hại phát sinh do không thực hiện hoặc không thực hiện đúng quy định tại khoản 1 và điểm d khoản 3 Điều này. \n 5. Trừ trường hợp quy định tại khoản 2 Điều này, người góp vốn trở thành cổ đông của công ty kể từ thời điểm đã thanh toán việc mua cổ phần và những thông tin về cổ đông quy định tại các điểm b, c, d và đ khoản 2 Điều 122 của Luật này được ghi vào sổ đăng ký cổ đông."
+    ],
+    "ground_truth_dieu": [
+      "Điều 12.1.LQ.47",
+      "Điều 12.1.LQ.113"
+    ],
+    "source_documents": [
+      "Luật số 59/2020/QH14"
+    ],
+    "de_muc": [
+      "Doanh nghiệp"
+    ],
+    "de_muc_id": [
+      "319387a3-090a-47a5-82f6-a9bacbe5d341"
+    ],
+    "capability": "multi_hop",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Cần ĐỒNG THỜI 2 điều cách xa nhau trong cùng đề mục (Điều 47 và Điều 113). Test khả năng lấy đủ 2 evidence, và nhận ra điểm khác biệt tinh tế (ngoại lệ Điều lệ)."
+  },
+  {
+    "id": "Q23",
+    "question": "Thời hiệu khởi kiện để yêu cầu Tòa án giải quyết tranh chấp hợp đồng là bao lâu?",
+    "expected_answer": "03 năm, kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền và lợi ích hợp pháp của mình bị xâm phạm.",
+    "expected_context": "Đề mục Dân sự — Điều 9.1.LQ.429",
+    "reference_contexts": [
+      "Điều 9.1.LQ.429. Thời hiệu khởi kiện về hợp đồng\n(Điều 429 Bộ luật số 91/2015/QH13, có hiệu lực thi hành kể từ ngày 01/01/2017)\nThời hiệu khởi kiện để yêu cầu Tòa án giải quyết tranh chấp hợp đồng là 03 năm, kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền và lợi ích hợp pháp của mình bị xâm phạm."
+    ],
+    "ground_truth_dieu": [
+      "Điều 9.1.LQ.429"
+    ],
+    "source_documents": [
+      "Bộ luật số 91/2015/QH13"
+    ],
+    "de_muc": [
+      "Dân sự"
+    ],
+    "de_muc_id": [
+      "eb0e4753-243e-4344-90e6-70aaf5188a6d"
+    ],
+    "capability": "simple_factual",
+    "difficulty": "easy",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Điều rất ngắn (1 câu) nằm giữa bộ luật khổng lồ (740 điều) — test khả năng tìm kim trong đống cỏ khô."
+  },
+  {
+    "id": "Q24",
+    "question": "Thời hiệu khởi kiện tranh chấp hợp đồng và thời hiệu khởi kiện yêu cầu bồi thường thiệt hại có khác nhau không?",
+    "expected_answer": "Không khác nhau về độ dài: cả hai đều là 03 năm kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền, lợi ích hợp pháp của mình bị xâm phạm. Khác nhau ở căn cứ pháp lý: tranh chấp hợp đồng theo Điều 429, bồi thường thiệt hại ngoài hợp đồng theo Điều 588 Bộ luật Dân sự số 91/2015/QH13.",
+    "expected_context": "Đề mục Dân sự — Điều 9.1.LQ.429 và Điều 9.1.LQ.588",
+    "reference_contexts": [
+      "Điều 9.1.LQ.429. Thời hiệu khởi kiện về hợp đồng\n(Điều 429 Bộ luật số 91/2015/QH13, có hiệu lực thi hành kể từ ngày 01/01/2017)\nThời hiệu khởi kiện để yêu cầu Tòa án giải quyết tranh chấp hợp đồng là 03 năm, kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền và lợi ích hợp pháp của mình bị xâm phạm.",
+      "Điều 9.1.LQ.588. Thời hiệu khởi kiện yêu cầu bồi thường thiệt hại\n(Điều 588 Bộ luật số 91/2015/QH13, có hiệu lực thi hành kể từ ngày 01/01/2017)\nThời hiệu khởi kiện yêu cầu bồi thường thiệt hại là 03 năm, kể từ ngày người có quyền yêu cầu biết hoặc phải biết quyền, lợi ích hợp pháp của mình bị xâm phạm."
+    ],
+    "ground_truth_dieu": [
+      "Điều 9.1.LQ.429",
+      "Điều 9.1.LQ.588"
+    ],
+    "source_documents": [
+      "Bộ luật số 91/2015/QH13"
+    ],
+    "de_muc": [
+      "Dân sự"
+    ],
+    "de_muc_id": [
+      "eb0e4753-243e-4344-90e6-70aaf5188a6d"
+    ],
+    "capability": "comparative",
+    "difficulty": "hard",
+    "answerable": true,
+    "eval_mode": "ragas",
+    "notes": "Hai điều gần như GIỐNG HỆT nhau về câu chữ → dense retrieval dễ lấy trùng 1 điều 2 lần và bỏ điều kia. Test khả năng phân biệt near-duplicate chunks."
+  },
+  {
+    "id": "Q25",
+    "question": "Hạn mức giao đất trồng cây hằng năm cho hộ gia đình, cá nhân tại đồng bằng sông Cửu Long là bao nhiêu hecta?",
+    "expected_answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có. Đề mục Đất đai chưa có nội dung trong bộ dữ liệu Bộ pháp điển hiện tại.",
+    "expected_context": "Không có — đề mục Đất đai (11.1) là file rỗng trong corpus",
+    "reference_contexts": [],
+    "ground_truth_dieu": [],
+    "source_documents": [],
+    "de_muc": [],
+    "de_muc_id": [],
+    "capability": "unanswerable_empty_demuc",
+    "difficulty": "hard",
+    "answerable": false,
+    "eval_mode": "manual",
+    "notes": "BẪY MẠNH: câu hỏi pháp lý HOÀN TOÀN HỢP LỆ, đúng chủ đề có trong cây phân cấp (hierarchy.json có 'Đất đai'), nhưng file demuc 06936689-... rỗng (602 bytes, <div class='_content'></div>). Hệ thống PHẢI từ chối. Nếu bịa ra hạn mức → hallucination nghiêm trọng. Đây cũng là câu test fallback threshold của Task 9."
+  },
+  {
+    "id": "Q26",
+    "question": "Thủ tục xin visa du học Canada diện SDS cần những giấy tờ gì?",
+    "expected_answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có. Câu hỏi nằm ngoài phạm vi Bộ pháp điển Việt Nam.",
+    "expected_context": "Không có — ngoài phạm vi corpus",
+    "reference_contexts": [],
+    "ground_truth_dieu": [],
+    "source_documents": [],
+    "de_muc": [],
+    "de_muc_id": [],
+    "capability": "unanswerable_out_of_scope",
+    "difficulty": "easy",
+    "answerable": false,
+    "eval_mode": "manual",
+    "notes": "Ngoài miền hoàn toàn. Điểm cosine tốt nhất phải THẤP → kích hoạt fallback/từ chối. Dùng câu này để CALIBRATE SCORE_THRESHOLD trong Task 9: đo cosine của Q01/Q07 (chắc chắn liên quan) so với Q26 (chắc chắn lạc đề), chọn ngưỡng nằm giữa hai nhóm."
+  },
+  {
+    "id": "Q27",
+    "question": "Mức đóng là bao nhiêu?",
+    "expected_answer": "Câu hỏi chưa đủ thông tin để trả lời. Hệ thống cần hỏi lại người dùng đang hỏi về mức đóng nào (bảo hiểm y tế, bảo hiểm xã hội, thuế...) và thuộc nhóm đối tượng nào.",
+    "expected_context": "Không xác định — câu hỏi thiếu chủ thể",
+    "reference_contexts": [],
+    "ground_truth_dieu": [],
+    "source_documents": [],
+    "de_muc": [],
+    "de_muc_id": [],
+    "capability": "ambiguous",
+    "difficulty": "medium",
+    "answerable": false,
+    "eval_mode": "manual",
+    "notes": "Câu hỏi mơ hồ. Đạt: hỏi lại làm rõ HOẶC nêu rõ giả định đang dùng (ví dụ 'giả sử bạn hỏi về BHYT...'). Trượt: chọn bừa một mức đóng và trả lời như thể chắc chắn. Chấm thủ công."
+  },
+  {
+    "id": "Q28",
+    "question": "asdkjh123 zxcvbnm qwerty ???",
+    "expected_answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+    "expected_context": "Không có — truy vấn rác",
+    "reference_contexts": [],
+    "ground_truth_dieu": [],
+    "source_documents": [],
+    "de_muc": [],
+    "de_muc_id": [],
+    "capability": "noise_robustness",
+    "difficulty": "easy",
+    "answerable": false,
+    "eval_mode": "manual",
+    "notes": "Truy vấn VÔ NGHĨA. Đây chính xác là kịch bản cảnh báo trong docstring Task 9: nếu dùng điểm RRF (luôn ≈0.0164) để so threshold thì câu này VẪN trả về kết quả 'hybrid' rác thay vì fallback. Nếu Q28 trả về chunk pháp luật bất kỳ → threshold đang so sai thang điểm, phải chuyển sang dùng cosine gốc của semantic_search."
   }
 ]
