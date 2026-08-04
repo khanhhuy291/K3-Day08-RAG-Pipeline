@@ -14,9 +14,11 @@ Base URL: "https://openrouter.ai/api/v1", dùng chung interface với OpenAI SDK
 """
 
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
 load_dotenv()
+load_dotenv(Path(__file__).parent / ".env")
 
 from .task9_retrieval_pipeline import retrieve
 
@@ -37,8 +39,12 @@ TOP_P = 0.9
 # Chọn 0.3 vì: RAG cần factual, ít sáng tạo
 TEMPERATURE = 0.3
 
-# TODO: Chọn LLM model (OpenRouter model ID)
-LLM_MODEL = "openai/gpt-4o-mini"  # hoặc model ":free" nếu chưa có credit
+# OpenAI LLM configuration: đọc từ env OPENAI_API_KEY, OPENAI_BASE_URL, OPENAI_MODEL
+# Nếu không có trong env thì fallback về giá trị mặc định.
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") or os.getenv("OPENROUTER_API_KEY") or ""
+OPENAI_BASE_URL = os.getenv("OPENAI_BASE_URL") or "https://openrouter.ai/api/v1"
+OPENAI_MODEL = os.getenv("OPENAI_MODEL") or "openai/gpt-4o-mini"
+LLM_MODEL = OPENAI_MODEL
 
 
 # =============================================================================
@@ -157,13 +163,12 @@ def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
     # # Step 4: Build prompt
     # user_message = f"""Context:\n{context}\n\n---\n\nQuestion: {query}"""
     #
-    # # Step 5: Call LLM (OpenRouter — OpenAI-compatible API)
+    # # Step 5: Call LLM (OpenAI-compatible API)
     # from openai import OpenAI
-    # api_key = os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY")
-    # client = OpenAI(api_key=api_key, base_url="https://openrouter.ai/api/v1")
+    # client = OpenAI(api_key=OPENAI_API_KEY, base_url=OPENAI_BASE_URL)
     #
     # response = client.chat.completions.create(
-    #     model=LLM_MODEL,
+    #     model=OPENAI_MODEL,
     #     messages=[
     #         {"role": "system", "content": SYSTEM_PROMPT},
     #         {"role": "user", "content": user_message}

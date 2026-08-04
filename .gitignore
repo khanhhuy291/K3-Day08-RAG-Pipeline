@@ -8,9 +8,12 @@ venv/
 
 # Env (keys)
 .env
+*.env
+!.env.example
 
-# Temp PDF conversion cache
-data/_tmp_pdf/
+# Data directory
+data/
+
 
 # Temp / cache
 .pytest_cache/
