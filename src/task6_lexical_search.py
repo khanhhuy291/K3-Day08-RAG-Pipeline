@@ -74,36 +74,81 @@ def load_corpus() -> list[dict]:
     docs = []
     base_dir = Path(__file__).parent.parent
     
-    # 1. Nạp dữ liệu từ data/bophapdien.json (Bộ Pháp Điển Việt Nam - 58,212 điều luật)
-    bophapdien_path = base_dir / "data" / "bophapdien.json"
-    if bophapdien_path.exists():
-        try:
-            with open(bophapdien_path, "r", encoding="utf-8") as f:
-                bpd_data = json.load(f)
-                for art in bpd_data.get("articles", []):
-                    chu_de = art.get("chu_de", "")
-                    de_muc = art.get("de_muc", "")
-                    ten_dieu = art.get("ten_dieu", "")
-                    ghi_chu = art.get("ghi_chu", "")
-                    noi_dung = art.get("noi_dung", "")
-                    phan_chuong = art.get("phan_chuong_muc", "")
-                    
-                    # Kết hợp chủ đề, đề mục, tên điều và nội dung để BM25 match từ khóa đầy đủ nhất
-                    content = f"[{chu_de} > {de_muc} > {phan_chuong}] {ten_dieu} {ghi_chu}\nNội dung: {noi_dung}".strip()
-                    metadata = {
-                        "source": "bophapdien.json",
-                        "type": "legal_bophapdien",
-                        "id": art.get("id", ""),
-                        "mapc": art.get("mapc", ""),
-                        "chu_de": chu_de,
-                        "de_muc": de_muc,
-                        "phan_chuong_muc": phan_chuong,
-                        "link_vbpl": art.get("link_vbpl", ""),
-                        "topic": chu_de
-                    }
-                    docs.append({"content": content, "metadata": metadata})
-        except Exception as e:
-            print(f"⚠ Lỗi nạp file {bophapdien_path.name}: {e}")
+    # 1. Nạp dữ liệu từ Bộ Pháp Điển theo chuẩn đầu ra của parse_bophapdien.py (Master file hoặc by_demuc)
+    bpd_paths = [
+        base_dir / "data" / "standardized" / "legal" / "bophapdien.json",
+        base_dir / "data" / "bophapdien.json"
+    ]
+    loaded_bpd = False
+    for path in bpd_paths:
+        if path.exists():
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    bpd_data = json.load(f)
+                    for art in bpd_data.get("articles", []):
+                        chu_de = art.get("chu_de", "")
+                        de_muc = art.get("de_muc", "")
+                        ten_dieu = art.get("ten_dieu", "")
+                        ghi_chu = art.get("ghi_chu", "")
+                        noi_dung = art.get("noi_dung", "")
+                        phan_chuong = art.get("phan_chuong_muc", "")
+                        chi_dan = art.get("chi_dan", [])
+                        chi_dan_str = f"\n(Chỉ dẫn: {'; '.join(chi_dan)})" if chi_dan else ""
+                        
+                        # Kết hợp trọn vẹn chủ đề, đề mục, chương, tên điều và nội dung cho BM25 match
+                        content = f"[{chu_de} > {de_muc} > {phan_chuong}] {ten_dieu} {ghi_chu}\nNội dung: {noi_dung}{chi_dan_str}".strip()
+                        metadata = {
+                            "source": path.name,
+                            "type": "legal_bophapdien",
+                            "id": art.get("id", ""),
+                            "mapc": art.get("mapc", ""),
+                            "chu_de": chu_de,
+                            "chu_de_id": art.get("chu_de_id", ""),
+                            "de_muc": de_muc,
+                            "de_muc_id": art.get("de_muc_id", ""),
+                            "phan_chuong_muc": phan_chuong,
+                            "link_vbpl": art.get("link_vbpl", ""),
+                            "chi_dan": chi_dan,
+                            "topic": chu_de
+                        }
+                        docs.append({"content": content, "metadata": metadata})
+                loaded_bpd = True
+                break
+            except Exception as e:
+                print(f"⚠ Lỗi nạp file {path}: {e}")
+
+    # Nếu file master chưa có, tự động quét thư mục by_demuc/ (được tạo bởi parse_bophapdien.py)
+    by_demuc_dir = base_dir / "data" / "standardized" / "legal" / "by_demuc"
+    if not loaded_bpd and by_demuc_dir.exists():
+        for dm_file in by_demuc_dir.glob("*.json"):
+            try:
+                with open(dm_file, "r", encoding="utf-8") as f:
+                    dm_data = json.load(f)
+                    for art in dm_data.get("articles", []):
+                        chu_de = art.get("chu_de", "")
+                        de_muc = art.get("de_muc", "")
+                        ten_dieu = art.get("ten_dieu", "")
+                        noi_dung = art.get("noi_dung", "")
+                        phan_chuong = art.get("phan_chuong_muc", "")
+                        chi_dan = art.get("chi_dan", [])
+                        chi_dan_str = f"\n(Chỉ dẫn: {'; '.join(chi_dan)})" if chi_dan else ""
+                        content = f"[{chu_de} > {de_muc} > {phan_chuong}] {ten_dieu}\nNội dung: {noi_dung}{chi_dan_str}".strip()
+                        docs.append({
+                            "content": content,
+                            "metadata": {
+                                "source": dm_file.name,
+                                "type": "legal_bophapdien",
+                                "id": art.get("id", ""),
+                                "mapc": art.get("mapc", ""),
+                                "chu_de": chu_de,
+                                "chu_de_id": art.get("chu_de_id", ""),
+                                "de_muc": de_muc,
+                                "de_muc_id": art.get("de_muc_id", ""),
+                                "link_vbpl": art.get("link_vbpl", "")
+                            }
+                        })
+            except Exception as e:
+                print(f"⚠ Lỗi nạp file đề mục {dm_file.name}: {e}")
 
     # 2. Nạp từ các file .md trong data/standardized/
     standardized_dir = base_dir / "data" / "standardized"

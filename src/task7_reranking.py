@@ -181,18 +181,18 @@ if __name__ == "__main__":
     print("\n🔗 TEST RRF RERANKING (Role 4 - Gộp kết quả Dense Semantic & Sparse BM25 Bộ Pháp Điển)")
     print("-" * 80)
 
-    # Danh sách giả định từ Semantic Search (tìm ý nghĩa sâu)
+    # Danh sách giả định từ Semantic Search (tìm ý nghĩa sâu) theo chuẩn parse_bophapdien.py
     dense_results = [
-        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.1. Phạm vi điều chỉnh quy định hoạt động cơ yếu", "score": 0.82, "metadata": {"source": "dense"}},
-        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.2. Đối tượng áp dụng đối với tổ chức cơ yếu", "score": 0.75, "metadata": {"source": "dense"}},
-        {"content": "Quy định chung về bảo đảm bí mật thông tin tài liệu nhà nước", "score": 0.61, "metadata": {"source": "dense"}},
+        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.1. Phạm vi điều chỉnh quy định hoạt động cơ yếu", "score": 0.82, "metadata": {"source": "bophapdien.json", "id": "node_01", "mapc": "dieu_1.7.LQ.1", "chu_de_id": "CD_01", "de_muc_id": "DM_07"}},
+        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.2. Đối tượng áp dụng đối với tổ chức cơ yếu", "score": 0.75, "metadata": {"source": "bophapdien.json", "id": "node_02", "mapc": "dieu_1.7.LQ.2", "chu_de_id": "CD_01", "de_muc_id": "DM_07"}},
+        {"content": "Quy định chung về bảo đảm bí mật thông tin tài liệu nhà nước", "score": 0.61, "metadata": {"source": "dense_general"}},
     ]
 
-    # Danh sách giả định từ BM25 Lexical Search (match chính xác từ khóa / số hiệu điều)
+    # Danh sách giả định từ BM25 Lexical Search (match chính xác từ khóa / số hiệu điều từ Task 6)
     sparse_results = [
-        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.2. Đối tượng áp dụng đối với tổ chức cơ yếu", "score": 15.5, "metadata": {"source": "sparse"}},
-        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.1. Phạm vi điều chỉnh quy định hoạt động cơ yếu", "score": 12.2, "metadata": {"source": "sparse"}},
-        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.NĐ.2.1. Chế độ chăm sóc y tế và nghỉ dưỡng", "score": 8.1, "metadata": {"source": "sparse"}},
+        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.2. Đối tượng áp dụng đối với tổ chức cơ yếu", "score": 15.5, "metadata": {"source": "bophapdien.json", "id": "node_02", "mapc": "dieu_1.7.LQ.2", "chu_de_id": "CD_01", "de_muc_id": "DM_07"}},
+        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.LQ.1. Phạm vi điều chỉnh quy định hoạt động cơ yếu", "score": 12.2, "metadata": {"source": "bophapdien.json", "id": "node_01", "mapc": "dieu_1.7.LQ.1", "chu_de_id": "CD_01", "de_muc_id": "DM_07"}},
+        {"content": "[An ninh quốc gia > Cơ yếu] Điều 1.7.NĐ.2.1. Chế độ chăm sóc y tế và nghỉ dưỡng", "score": 8.1, "metadata": {"source": "bophapdien.json", "id": "node_03", "mapc": "dieu_1.7.ND.2.1", "chu_de_id": "CD_01", "de_muc_id": "DM_07"}},
     ]
 
     fused_results = rerank_rrf([dense_results, sparse_results], top_k=3, k=60)

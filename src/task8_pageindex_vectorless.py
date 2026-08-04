@@ -41,9 +41,12 @@ def upload_documents():
     if not PAGEINDEX_API_KEY:
         print("⚠ Chưa cấu hình PAGEINDEX_API_KEY. Bỏ qua upload sang PageIndex.")
         return
-    bophapdien_path = Path(__file__).parent.parent / "data" / "bophapdien.json"
-    if bophapdien_path.exists():
-        print(f"  ✓ Bộ Pháp Điển ({bophapdien_path.name}) có cấu trúc cây chuẩn đã sẵn sàng cho Vectorless Tree Search fallback.")
+    bophapdien_paths = [
+        Path(__file__).parent.parent / "data" / "standardized" / "legal" / "bophapdien.json",
+        Path(__file__).parent.parent / "data" / "bophapdien.json"
+    ]
+    if any(p.exists() for p in bophapdien_paths):
+        print("  ✓ Bộ Pháp Điển theo cấu trúc parse_bophapdien (Chủ đề > Đề mục > Chương/Mục > Điều) đã sẵn sàng cho Vectorless Tree Search fallback.")
     try:
         from pageindex.client import PageIndexClient
         client = PageIndexClient(api_key=PAGEINDEX_API_KEY)
@@ -97,38 +100,81 @@ def pageindex_search(query: str, top_k: int = 5) -> list[dict]:
     if not results:
         global BOPHAPDIEN_STRUCTURAL_TREE
         base_dir = Path(__file__).parent.parent
-        bophapdien_path = base_dir / "data" / "bophapdien.json"
         
-        # Nạp dữ liệu vào cache cấu trúc cây nếu chưa có
-        if not BOPHAPDIEN_STRUCTURAL_TREE and bophapdien_path.exists():
-            try:
-                with open(bophapdien_path, "r", encoding="utf-8") as f:
-                    bpd_data = json.load(f)
-                    for art in bpd_data.get("articles", []):
-                        chu_de = art.get("chu_de", "")
-                        de_muc = art.get("de_muc", "")
-                        ten_dieu = art.get("ten_dieu", "")
-                        ghi_chu = art.get("ghi_chu", "")
-                        noi_dung = art.get("noi_dung", "")
-                        phan_chuong = art.get("phan_chuong_muc", "")
-                        
-                        node_content = f"[PageIndex Structural Node - {chu_de} > {de_muc} > {phan_chuong}] {ten_dieu}: {noi_dung}".strip()
-                        BOPHAPDIEN_STRUCTURAL_TREE.append({
-                            "content": node_content,
-                            "metadata": {
-                                "section_title": f"{chu_de} > {de_muc} > {phan_chuong} > {ten_dieu}",
-                                "id": art.get("id", ""),
-                                "link_vbpl": art.get("link_vbpl", ""),
-                                "source": "bophapdien.json",
-                                "chu_de": chu_de,
-                                "de_muc": de_muc
-                            },
-                            "source": "pageindex",
-                            "_text_title": f"{chu_de} {de_muc} {phan_chuong} {ten_dieu} {ghi_chu}".lower(),
-                            "_text_content": noi_dung.lower()
-                        })
-            except Exception as e:
-                print(f"  ⚠ Lỗi đọc {bophapdien_path.name} cho PageIndex fallback: {e}")
+        # Nạp dữ liệu vào cache cấu trúc cây nếu chưa có (từ đầu ra parse_bophapdien.py)
+        if not BOPHAPDIEN_STRUCTURAL_TREE:
+            bpd_paths = [
+                base_dir / "data" / "standardized" / "legal" / "bophapdien.json",
+                base_dir / "data" / "bophapdien.json"
+            ]
+            loaded_tree = False
+            for path in bpd_paths:
+                if path.exists():
+                    try:
+                        with open(path, "r", encoding="utf-8") as f:
+                            bpd_data = json.load(f)
+                            for art in bpd_data.get("articles", []):
+                                chu_de = art.get("chu_de", "")
+                                de_muc = art.get("de_muc", "")
+                                ten_dieu = art.get("ten_dieu", "")
+                                ghi_chu = art.get("ghi_chu", "")
+                                noi_dung = art.get("noi_dung", "")
+                                phan_chuong = art.get("phan_chuong_muc", "")
+                                chi_dan = art.get("chi_dan", [])
+                                
+                                node_content = f"[PageIndex Structural Node - {chu_de} > {de_muc} > {phan_chuong}] {ten_dieu}: {noi_dung}".strip()
+                                BOPHAPDIEN_STRUCTURAL_TREE.append({
+                                    "content": node_content,
+                                    "metadata": {
+                                        "section_title": f"{chu_de} > {de_muc} > {phan_chuong} > {ten_dieu}",
+                                        "id": art.get("id", ""),
+                                        "mapc": art.get("mapc", ""),
+                                        "chu_de_id": art.get("chu_de_id", ""),
+                                        "de_muc_id": art.get("de_muc_id", ""),
+                                        "link_vbpl": art.get("link_vbpl", ""),
+                                        "source": "bophapdien_tree",
+                                        "chu_de": chu_de,
+                                        "de_muc": de_muc
+                                    },
+                                    "source": "pageindex",
+                                    "_text_title": f"{chu_de} {de_muc} {phan_chuong} {ten_dieu} {ghi_chu} {' '.join(chi_dan)}".lower(),
+                                    "_text_content": noi_dung.lower()
+                                })
+                        loaded_tree = True
+                        break
+                    except Exception as e:
+                        print(f"  ⚠ Lỗi đọc {path.name} cho PageIndex fallback: {e}")
+
+            # Nếu file master chưa có, tự động load cây cấu trúc từ các file by_demuc/
+            by_demuc_dir = base_dir / "data" / "standardized" / "legal" / "by_demuc"
+            if not loaded_tree and by_demuc_dir.exists():
+                for dm_file in by_demuc_dir.glob("*.json"):
+                    try:
+                        with open(dm_file, "r", encoding="utf-8") as f:
+                            dm_data = json.load(f)
+                            for art in dm_data.get("articles", []):
+                                chu_de = art.get("chu_de", "")
+                                de_muc = art.get("de_muc", "")
+                                ten_dieu = art.get("ten_dieu", "")
+                                noi_dung = art.get("noi_dung", "")
+                                phan_chuong = art.get("phan_chuong_muc", "")
+                                node_content = f"[PageIndex Structural Node - {chu_de} > {de_muc} > {phan_chuong}] {ten_dieu}: {noi_dung}".strip()
+                                BOPHAPDIEN_STRUCTURAL_TREE.append({
+                                    "content": node_content,
+                                    "metadata": {
+                                        "section_title": f"{chu_de} > {de_muc} > {ten_dieu}",
+                                        "id": art.get("id", ""),
+                                        "mapc": art.get("mapc", ""),
+                                        "chu_de_id": art.get("chu_de_id", ""),
+                                        "de_muc_id": art.get("de_muc_id", ""),
+                                        "source": "bophapdien_tree"
+                                    },
+                                    "source": "pageindex",
+                                    "_text_title": f"{chu_de} {de_muc} {phan_chuong} {ten_dieu}".lower(),
+                                    "_text_content": noi_dung.lower()
+                                })
+                    except Exception as e:
+                        print(f"  ⚠ Lỗi nạp file cây đề mục {dm_file.name}: {e}")
 
         # Tìm kiếm theo cấu trúc (Vectorless Tree Matching) trên Bộ Pháp Điển
         if BOPHAPDIEN_STRUCTURAL_TREE and query.strip():
