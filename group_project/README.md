@@ -2,104 +2,176 @@
 
 ## Mục Tiêu
 
-Sau khi hoàn thành bài cá nhân, nhóm ngồi lại để xây dựng **1 trong 2 sản phẩm**:
+Sau khi hoàn thành bài cá nhân, nhóm xây dựng chatbot trả lời câu hỏi về dịch vụ và chính sách đại học bằng kỹ thuật Retrieval-Augmented Generation (RAG), đồng thời xây dựng pipeline đánh giá chất lượng hệ thống.
 
 ---
 
-## Yêu cầu 1: Sản phẩm nhóm RAG Chatbot
+# Yêu cầu 1: University Services RAG Chatbot
 
-Xây dựng chatbot trả lời câu hỏi về dịch vụ và chính sách đại học liên quan.
+## Tính năng
 
-**Yêu cầu:**
-- Giao diện chat (Streamlit / Gradio / Chainlit)
-- Trả lời có citation (dựa trên Task 10)
-- Hỗ trợ follow-up questions (conversation memory)
-- Hiển thị source documents đã dùng
+- Chatbot hỏi đáp về chính sách và dịch vụ đại học.
+- Giao diện Web bằng Streamlit.
+- Trả lời có Citation.
+- Hỗ trợ hội thoại nhiều lượt (Conversation Memory).
+- Hiển thị các tài liệu nguồn được sử dụng.
+- Hỗ trợ Hybrid Retrieval (BM25 + Dense Retrieval).
+- Có Reranking nhằm cải thiện chất lượng truy xuất.
 
-**Stack gợi ý:**
+---
+
+# Yêu cầu 2: Evaluation Pipeline
+
+Framework sử dụng:
+
+- **RAGAS**
+
+Các metric đánh giá:
+
+- Faithfulness
+- Answer Relevance
+- Context Recall
+- Context Precision
+
+Thực hiện:
+
+- Xây dựng Golden Dataset gồm tối thiểu 15 câu hỏi.
+- Đánh giá trên toàn bộ dataset.
+- So sánh hai cấu hình:
+  - Dense Retrieval
+  - Hybrid Retrieval + Reranker
+- Phân tích các trường hợp có điểm thấp và đề xuất cải thiện.
+
+---
+
+# Kiến Trúc Hệ Thống
+
+```text
+                        +-----------------------+
+                        |    Streamlit UI       |
+                        +-----------+-----------+
+                                    |
+                                    |
+                          User Question
+                                    |
+                                    v
+                     +----------------------------+
+                     | Conversation Memory        |
+                     +-------------+--------------+
+                                   |
+                                   v
+                        +---------------------+
+                        | Retrieval Pipeline  |
+                        +---------------------+
+                          |              |
+                     Dense Search     BM25 Search
+                          |              |
+                           \            /
+                            \          /
+                             Hybrid Fusion
+                                   |
+                                   v
+                            Cross Encoder
+                              Reranker
+                                   |
+                                   v
+                          Top-k Relevant Chunks
+                                   |
+                                   v
+                        Large Language Model
+                                   |
+                                   v
+                      Answer + Citation + Sources
 ```
-Chainlit/Streamlit → Retrieval (Task 9) → Generation (Task 10) → Display
-```
 
 ---
 
-## Yêu cầu 2: RAG Evaluation Pipeline
+# Công Nghệ Sử Dụng
 
-Sử dụng **1 trong 3 framework** sau để evaluate pipeline RAG của nhóm:
-
-### Framework lựa chọn
-
-| Framework | Cài đặt | Đặc điểm |
-|-----------|---------|-----------|
-| [DeepEval](https://github.com/confident-ai/deepeval) | `pip install deepeval` | Nhiều metric built-in, dễ integrate với pytest |
-| [RAGAS](https://github.com/explodinggradients/ragas) | `pip install ragas` | Chuẩn industry cho RAG eval, 3 trục chính |
-| [TruLens](https://github.com/truera/trulens) | `pip install trulens` | Dashboard UI, feedback functions mạnh |
-
-### Yêu cầu Evaluation
-
-1. **Tạo Golden Dataset** — tối thiểu 15 cặp Q&A (question, expected_answer, expected_context)
-2. **Chạy evaluation** trên toàn bộ golden dataset với các metrics sau:
-   - **Faithfulness** — câu trả lời có bám đúng context không?
-   - **Answer Relevance** — câu trả lời có đúng câu hỏi không?
-   - **Context Recall** — retriever có lấy đủ evidence không?
-   - **Context Precision** — trong context lấy về, bao nhiêu % thực sự hữu ích?
-3. **So sánh A/B** — chạy eval trên ít nhất 2 config khác nhau (ví dụ: có reranking vs không reranking, hoặc hybrid vs dense-only)
-4. **Báo cáo** — bảng điểm + phân tích worst performers + đề xuất cải tiến
-
-Xem code mẫu (DeepEval/RAGAS/TruLens) chi tiết trong `README.md` gốc mục "Yêu cầu 2".
-
-### Deliverable Evaluation
-
-- [ ] File `group_project/evaluation/golden_dataset.json` — 15+ cặp Q&A
-- [ ] File `group_project/evaluation/eval_pipeline.py` — script chạy evaluation
-- [ ] File `group_project/evaluation/results.md` — bảng điểm + phân tích
-- [ ] So sánh A/B ít nhất 2 configs
+- Streamlit
+- LangChain
+- HuggingFace
+- BAAI/bge-m3
+- Qdrant
+- BM25
+- Cross-Encoder Reranker
+- RAGAS
 
 ---
 
-## Yêu Cầu Chung
-
-1. **Tích hợp pipeline** từ bài cá nhân của các thành viên
-2. **Demo hoạt động được** trong buổi trình bày (chạy local hoặc deploy)
-3. **Evaluation pipeline** chạy được và có báo cáo kết quả
-4. **Code push lên repository** chung của nhóm
-5. **README** mô tả kiến trúc và phân công (điền bên dưới)
-
----
-
-## Kiến Trúc Hệ Thống
-
-```
-[Vẽ diagram kiến trúc ở đây]
-```
-
----
-
-## Phân Công Công Việc
+# Phân Công Công Việc
 
 | Thành viên | MSSV | Nhiệm vụ | Trạng thái |
-|-----------|------|----------|------------|
-| | | | |
-| | | | |
-| | | | |
-| | | | |
+|------------|------|----------|------------|
+| Đinh Xuân Huy | 2A202601894 | Thiết kế kiến trúc hệ thống, Dense Retrieval, Hybrid Search, Vector Database, tích hợp RAG Pipeline | ✅ |
+| Nguyễn Bá Khánh Huy | 2A202601591 | Xây dựng Data Processing, Chunking, Embedding và quản lý dữ liệu | ✅ |
+| Ngô Quang Dũng | 2A202601819 | Phát triển giao diện Streamlit và Conversation Memory | ✅ |
+| Phạm Tuấn Việt | 2A202601987 | Citation, Source Display và tích hợp LLM Generation | ✅ |
+| Phạm Tiến Anh | 2A202601549 | Xây dựng Evaluation Pipeline (RAGAS), Golden Dataset và báo cáo kết quả | ✅ |
+| Đỗ Đức Trường | 2A202601499 | Kiểm thử hệ thống, so sánh A/B, tối ưu Retrieval và hỗ trợ hoàn thiện README | ✅ |
 
 ---
 
-## Hướng Dẫn Chạy
+# Cấu Trúc Thư Mục
 
-```bash
-# Cài đặt dependencies
-pip install -r requirements.txt
-
-# Chạy app
-streamlit run app.py
-# hoặc
-chainlit run app.py
+```text
+group_project/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+│
+├── data/
+│
+├── embedding/
+│
+├── retrieval/
+│
+├── generation/
+│
+├── ui/
+│
+├── vectorstore/
+│
+├── evaluation/
+│   ├── golden_dataset.json
+│   ├── eval_pipeline.py
+│   └── results.md
+│
+└── utils/
 ```
 
 ---
 
-## Lưu ý
+# Hướng Dẫn Chạy
 
-Hãy giữ lại repo này nếu như bạn học track 3 giai đoạn 2, chúng ta sẽ phát triển tiếp dự án lên knowledge graph để khắc phục các câu hỏi hóc búa khi có các câu hỏi khó.
+## Cài đặt
+
+```bash
+pip install -r requirements.txt
+```
+
+## Chạy ứng dụng
+
+```bash
+streamlit run app.py
+```
+
+---
+
+# Deliverables
+
+- ✅ Chatbot hoạt động hoàn chỉnh
+- ✅ Citation và Source Documents
+- ✅ Conversation Memory
+- ✅ Golden Dataset (15+ câu hỏi)
+- ✅ Evaluation Pipeline
+- ✅ So sánh A/B giữa hai cấu hình Retrieval
+- ✅ Báo cáo kết quả Evaluation
+- ✅ README hoàn chỉnh
+
+---
+
+# Đóng Góp
+
+Mỗi thành viên chịu trách nhiệm phát triển và kiểm thử phần được phân công, đồng thời phối hợp tích hợp thành hệ thống RAG hoàn chỉnh.
